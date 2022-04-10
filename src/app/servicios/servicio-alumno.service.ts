@@ -8,13 +8,13 @@ import { Alumno } from '../clases/alumno';
 })
 export class ServicioAlumnoService {
   alumnos: any[] = [];
-  alumnosObservable: Observable<Alumno[]>;
-  private alumnoSubject: Subject<any>;
+  //alumnosObservable: Observable<Alumno[]>;
+  //private alumnoSubject: Subject<any>;
   constructor(){
-    this.alumnosObservable = new Observable((suscripcion) =>{
+    /*this.alumnosObservable = new Observable((suscripcion) =>{
       suscripcion.next(this.alumnos)
     });
-    this.alumnoSubject = new Subject();
+    this.alumnoSubject = new Subject();*/
   }
 
   guardarAlumno(value: any){
