@@ -1,0 +1,37 @@
+import { NgModule } from "@angular/core";
+import {MatButtonModule} from '@angular/material/button';
+import { MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import { MatSidenavModule} from  '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+
+@NgModule({
+    exports: [
+        MatButtonModule,
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        MatTabsModule,
+        MatButtonToggleModule,
+        MatToolbarModule,
+        MatGridListModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule
+
+    ]
+})
+
+export class MaterialModule {}
