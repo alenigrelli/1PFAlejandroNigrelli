@@ -8,26 +8,25 @@ import { Alumno } from '../clases/alumno';
 })
 export class ServicioAlumnoService {
   alumnos: any[] = [];
-  //alumnosObservable: Observable<Alumno[]>;
+  alumnosObservable: Observable<Alumno[]>;
   //private alumnoSubject: Subject<any>;
   constructor(){
-    /*this.alumnosObservable = new Observable((suscripcion) =>{
+    this.alumnosObservable = new Observable((suscripcion) =>{
       suscripcion.next(this.alumnos)
     });
-    this.alumnoSubject = new Subject();*/
   }
 
   guardarAlumno(value: any){
     this.alumnos = this.alumnos.filter( alumno => alumno.id !== value.id);
-    return this.alumnos.push(value);
+    this.alumnos.push(value);
   }
 
   eliminarAlumno(id: number){
-    return this.alumnos.filter( alumno => alumno.id !== id);
+    this.alumnos = this.alumnos.filter( alumno => alumno.id !== id);
   }
 
   obtenerAlumnos(){
-    return this.alumnos;
+    return this.alumnosObservable;//this.alumnos;
   }
 
 }
