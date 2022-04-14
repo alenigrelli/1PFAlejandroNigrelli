@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +14,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
 import { TamanoletraDirective } from './directivas/tamanoletra.directive';
 import { ServicioAlumnoService } from './servicios/servicio-alumno.service';
+import { ListaCursosComponent } from './components/lista-cursos/lista-cursos.component';
+import { ServiciosCursoService } from './servicios/servicios-curso.service';
+import { ConsultaAlumnosComponent } from './components/consulta-alumnos/consulta-alumnos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,16 +25,19 @@ import { ServicioAlumnoService } from './servicios/servicio-alumno.service';
     NavbarComponent,
     ToolbarComponent,
     NombreApellidoPipe,
-    TamanoletraDirective
+    TamanoletraDirective,
+    ListaCursosComponent,
+    ConsultaAlumnosComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [ServicioAlumnoService],
+  providers: [ServicioAlumnoService, ServiciosCursoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,7 +15,6 @@ export class ListaAlumnosComponent implements OnInit {
   displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento', 'ingreso', 'matinscr', 'editar', 'eliminar'];
   dataSource: any;
   constructor(public dialog: MatDialog, private servicioAlumnos: ServicioAlumnoService) {
-    //this.alumnos = this.servicioAlumnos.obtenerAlumnos();
   }
 
   ngOnInit(): void {
@@ -26,23 +25,17 @@ export class ListaAlumnosComponent implements OnInit {
 
 
   eliminarAlumno(id: number){
-    //this.alumnos = [...this.servicioAlumnos.eliminarAlumno(id)];
     this.servicioAlumnos.eliminarAlumno(id);
   }
 
   editarAlumno(value: any){
-    const dialogRef = this.dialog.open(ABMalumnosComponent,{
+    this.dialog.open(ABMalumnosComponent,{
       data: value
     });
-    /*dialogRef.afterClosed().subscribe(dato =>{
-      this.alumnos = [...this.servicioAlumnos.obtenerAlumnos()];
-    })*/
+
   }
 
   agregarAlumno(){
-    const dialogRef = this.dialog.open(ABMalumnosComponent);
-    /*dialogRef.afterClosed().subscribe(dato =>{
-      this.alumnos = [...this.servicioAlumnos.obtenerAlumnos()];
-    })*/
+    this.dialog.open(ABMalumnosComponent);
   }
 }

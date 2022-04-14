@@ -7,9 +7,7 @@ import { Alumno } from '../clases/alumno';
 export class NombreApellidoPipe implements PipeTransform {
 
   transform(alumno: Alumno): unknown {
-    console.log(alumno.apellido);
     let nombreCompleto = alumno.nombre + '-' + alumno.apellido;
-    console.log(nombreCompleto);
     return nombreCompleto;
   }
 
