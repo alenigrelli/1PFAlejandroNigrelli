@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { filter, Observable, of, from, Subscription } from 'rxjs';
+import { filter, map, Observable, of, from, Subscription } from 'rxjs';
 import { Alumno } from 'src/app/clases/alumno';
 import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
 
@@ -33,11 +33,17 @@ export class ConsultaAlumnosComponent implements OnInit, OnDestroy {
   }
 
   todosAlumnos(){
-    this.servicioAlumnos.obtenerAlumnos();
+    this.alumnosSubscripcion = this.servicioAlumnos.obtenerAlumnos().subscribe(alumnos =>{
+      this.alumnos = alumnos;
+    });
   }
   
   alumnosAprobados(){
-    this.servicioAlumnos.obtenerAlumnos('aprobados');
+    this.alumnosSubscripcion = this.servicioAlumnos.obtenerAlumnos()
+    .pipe(map(alumnos => alumnos.filter((alumno: Alumno) => alumno.promedio > 30)))
+    .subscribe( alumnos =>{
+      this.alumnos = alumnos;
+    })
   }
 
   ngOnDestroy(){

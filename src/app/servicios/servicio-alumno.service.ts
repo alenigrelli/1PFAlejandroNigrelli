@@ -28,22 +28,13 @@ export class ServicioAlumnoService implements OnDestroy {
     this.alumnoSubject.next(this.alumnos)
   }
 
-  obtenerAlumnos(estado?:string){
+  obtenerAlumnos(){
+    this.alumnoObservable = this.http.get('https://625608b68646add390e01368.mockapi.io/alumnos/v1/alumnos');
+    this.alumnoSubscripcion = this.alumnoObservable.subscribe(alumnos => {
+      this.alumnos = alumnos;
+      this.alumnoSubject.next(this.alumnos);
+    });
 
-    if('aprobados' === estado){
-      this.alumnoObservable = this.http.get('https://625608b68646add390e01368.mockapi.io/alumnos/v1/alumnos');
-      
-      this.alumnoObservable.pipe(map(alumnos => alumnos.filter((alumno: Alumno) => alumno.promedio > 6))).subscribe( alumnos => {
-        this.alumnos = alumnos;
-        this.alumnoSubject.next(this.alumnos);
-      })
-    }else{
-      this.alumnoObservable = this.http.get('https://625608b68646add390e01368.mockapi.io/alumnos/v1/alumnos');
-      this.alumnoSubscripcion = this.alumnoObservable.subscribe(alumnos => {
-        this.alumnos = alumnos;
-        this.alumnoSubject.next(this.alumnos);
-      });
-    }
     return this.alumnoSubject;
   }
 
