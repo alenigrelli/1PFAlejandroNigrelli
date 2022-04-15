@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { filter, map, Observable, of, from, Subscription } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { Alumno } from 'src/app/clases/alumno';
 import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
 
@@ -17,7 +17,7 @@ export class ConsultaAlumnosComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento', 'ingreso', 'matinscr'];
   dataSource: any;
   alumnosSubscripcion!: Subscription;
-
+  
   ngOnInit(): void {
     this.alumnosSubscripcion = this.servicioAlumnos.obtenerAlumnos().subscribe( alumnos =>{
       this.alumnos = alumnos;
@@ -40,7 +40,7 @@ export class ConsultaAlumnosComponent implements OnInit, OnDestroy {
   
   alumnosAprobados(){
     this.alumnosSubscripcion = this.servicioAlumnos.obtenerAlumnos()
-    .pipe(map(alumnos => alumnos.filter((alumno: Alumno) => alumno.promedio > 30)))
+    .pipe(map(alumnos => alumnos.filter((alumno: Alumno) => alumno.promedio > 10)))
     .subscribe( alumnos =>{
       this.alumnos = alumnos;
     })
