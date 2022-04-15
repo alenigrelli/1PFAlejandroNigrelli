@@ -17,6 +17,7 @@ import { ServicioAlumnoService } from './servicios/servicio-alumno.service';
 import { ListaCursosComponent } from './components/lista-cursos/lista-cursos.component';
 import { ServiciosCursoService } from './servicios/servicios-curso.service';
 import { ConsultaAlumnosComponent } from './components/consulta-alumnos/consulta-alumnos.component';
+import { AbmCursosComponent } from './components/abm-cursos/abm-cursos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { ConsultaAlumnosComponent } from './components/consulta-alumnos/consulta
     NombreApellidoPipe,
     TamanoletraDirective,
     ListaCursosComponent,
-    ConsultaAlumnosComponent
+    ConsultaAlumnosComponent,
+    AbmCursosComponent
   ],
   imports: [
     BrowserModule,

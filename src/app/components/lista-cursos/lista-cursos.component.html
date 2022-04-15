@@ -1,3 +1,8 @@
+<div style="text-align: right; margin-right: 20px;">
+      <button mat-mini-fab color="primary"  (click)="agregarCurso()" >
+        <mat-icon >add</mat-icon>
+      </button>
+      </div>
 <table mat-table [dataSource]="cursos$ | async" class="mat-elevation-z8">
       <ng-container matColumnDef="nombre">
       <th  mat-header-cell appTamanoletra *matHeaderCellDef> Nombre</th>
