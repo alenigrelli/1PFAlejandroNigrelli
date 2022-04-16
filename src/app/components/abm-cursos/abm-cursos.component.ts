@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service';
 
 @Component({
@@ -10,22 +11,25 @@ import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service
 export class AbmCursosComponent implements OnInit {
   formCurso: FormGroup = new FormGroup({
     id: new FormControl(''),
-    dni: new FormControl('', Validators.required),
     nombre: new FormControl('', Validators.required),
-    apellido: new FormControl('', Validators.required),
-    fechaIngreso: new FormControl('', Validators.required),
-    edad: new FormControl('', Validators.required),
-    fechaNacimiento: new FormControl('', Validators.required),
-    cantMatInscr: new FormControl('', Validators.required)
+    fechaInicio: new FormControl('', Validators.required),
+    fechaFin: new FormControl('', Validators.required)
   });
   data: boolean = false;
-  constructor(public servicioCursos: ServiciosCursoService) { }
+  constructor(public servicioCursos: ServiciosCursoService,
+    public dialogRef: MatDialogRef<AbmCursosComponent>,
+    ) { }
 
   ngOnInit(): void {
 
   }
 
   guardar(){
-    this.servicioCursos.guardarCurso(this.formCurso.value);
+    if(this.formCurso.status === 'VALID'){
+      if(!this.formCurso.value.id)
+        this.formCurso.value.id = Math.random();
+      this.servicioCursos.guardarCurso(this.formCurso.value);
+      this.dialogRef.close();
+    }
   }
 }

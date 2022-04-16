@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
 @Component({
   selector: 'app-abmalumnos',
@@ -20,7 +20,8 @@ export class ABMalumnosComponent implements OnInit {
   });
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private servicioAlumnos: ServicioAlumnoService
+    private servicioAlumnos: ServicioAlumnoService,
+    public dialogRef: MatDialogRef<ABMalumnosComponent>,
   ){
   }
 
@@ -31,10 +32,13 @@ export class ABMalumnosComponent implements OnInit {
   }
 
   guardar(){
-    if(!this.formAlumno.value.id)
-      this.formAlumno.value.id = Math.random();
-    
-    this.servicioAlumnos.guardarAlumno(this.formAlumno.value);
+    if(this.formAlumno.status === 'VALID'){
+      if(!this.formAlumno.value.id)
+        this.formAlumno.value.id = Math.random();
+      
+      this.servicioAlumnos.guardarAlumno(this.formAlumno.value);
+      this.dialogRef.close();
+    }
   }
 
 

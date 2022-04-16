@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service';
 import { AbmCursosComponent } from '../abm-cursos/abm-cursos.component';
 
@@ -10,9 +10,9 @@ import { AbmCursosComponent } from '../abm-cursos/abm-cursos.component';
   templateUrl: './lista-cursos.component.html',
   styleUrls: ['./lista-cursos.component.css']
 })
-export class ListaCursosComponent implements OnInit {
+export class ListaCursosComponent implements OnInit, OnDestroy {
   @ViewChild(MatTable) table!: MatTable<any>;
-
+  subscripcion!: Subscription;
   cursos$!: Observable<any>;
   displayedColumns: string[] = ['nombre', 'inicio', 'fin'];
 
@@ -27,10 +27,14 @@ export class ListaCursosComponent implements OnInit {
   }
   
   agregarCurso(){
-    const Observable = this.dialog.open(AbmCursosComponent).afterClosed();
-    Observable.subscribe(result => {
+    const ObservableCurso = this.dialog.open(AbmCursosComponent).afterClosed();
+    this.subscripcion = ObservableCurso.subscribe(result => {
       this.cursos$ = this.cursosServicio.obtenerCursoMod();
     });
+  }
+
+  ngOnDestroy(){
+    this.subscripcion.unsubscribe();
   }
 
 }
