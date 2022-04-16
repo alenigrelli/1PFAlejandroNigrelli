@@ -10,7 +10,6 @@ export class TamanoletraDirective implements OnInit {
 
 
   ngOnInit(){
-    this.elemento.nativeElement.style.fontSize = "20px"
-    //this.elemento.nativeElement.style. = "100%"
+    this.elemento.nativeElement.style.fontSize = "20px";
   }
 }
