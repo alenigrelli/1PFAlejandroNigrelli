@@ -19,6 +19,7 @@ import { ServiciosCursoService } from './servicios/servicios-curso.service';
 import { ConsultaAlumnosComponent } from './components/consulta-alumnos/consulta-alumnos.component';
 import { AbmCursosComponent } from './components/abm-cursos/abm-cursos.component';
 import { AppRoutingModule } from './app-routing.module';
+import { StandardbuttonDirective } from './directivas/standardbutton.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { AppRoutingModule } from './app-routing.module';
     TamanoletraDirective,
     ListaCursosComponent,
     ConsultaAlumnosComponent,
-    AbmCursosComponent
+    AbmCursosComponent,
+    StandardbuttonDirective
   ],
   imports: [
     BrowserModule,
