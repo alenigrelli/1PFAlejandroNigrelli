@@ -18,6 +18,7 @@ import { ListaCursosComponent } from './components/lista-cursos/lista-cursos.com
 import { ServiciosCursoService } from './servicios/servicios-curso.service';
 import { ConsultaAlumnosComponent } from './components/consulta-alumnos/consulta-alumnos.component';
 import { AbmCursosComponent } from './components/abm-cursos/abm-cursos.component';
+import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { AbmCursosComponent } from './components/abm-cursos/abm-cursos.component
     MaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [ServicioAlumnoService, ServiciosCursoService],
   bootstrap: [AppComponent]
