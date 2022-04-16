@@ -1,4 +1,6 @@
-export class Alumno {
+import { Persona } from "./persona";
+
+export class Alumno extends Persona {
     constructor(
     public promedio: number,
     public cantMatInscr: number,
@@ -9,6 +11,7 @@ export class Alumno {
     public edad?: number,
     public fechaNacimiento?: Date,
     ){
+        super();
         this.promedio = 0;
     }
 }
