@@ -26,8 +26,14 @@ export class ServiciosCursoService {
   obtenerCursoMod(): Observable<any>{
     return of(this.cursos)
   }
+
   guardarCurso(value: any){
-    //this.cursos = this.cursos.filter( curso => curso.id !== value.id);
+    this.cursos = this.cursos.filter( curso => curso.id !== value.id);
     this.cursos.push(value);
+  }
+
+  eliminarCurso(id: number){
+    this.cursos = this.cursos.filter( curso => curso.id !== id);
+    return of(this.cursos);
   }
 }

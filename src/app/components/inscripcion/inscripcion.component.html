@@ -1,0 +1,28 @@
+
+<table mat-table [dataSource]="cursos$ | async" style="width: 100%;" class="mat-elevation-z8">
+    <ng-container matColumnDef="nombre">
+    <th  mat-header-cell appTamanoletra *matHeaderCellDef> Nombre</th>
+    <td mat-cell  *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="inicio">
+          <th  mat-header-cell appTamanoletra *matHeaderCellDef> Fecha Inicio</th>
+          <td mat-cell  *matCellDef="let element"> {{element.fechaInicio | date: 'dd/mm/yyyy' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fin">
+          <th  mat-header-cell appTamanoletra *matHeaderCellDef> Fecha Fin</th>
+          <td mat-cell  *matCellDef="let element"> {{element.fechaFin | date: 'dd/mm/yyyy'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="inscribirAlumno">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"> 
+            <button matTooltip="Inscribir alumno" [matTooltipShowDelay]="1000" [matTooltipHideDelay]="1" [matTooltipPosition]="'above'" aria-placeholder="Inscribir alumno" mat-mini-fab color="primary" (click)="inscribirAlumno(element.id)">
+            <mat-icon>add</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

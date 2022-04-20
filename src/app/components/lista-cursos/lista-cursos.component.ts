@@ -14,12 +14,12 @@ export class ListaCursosComponent implements OnInit, OnDestroy {
   @ViewChild(MatTable) table!: MatTable<any>;
   subscripcion!: Subscription;
   cursos$!: Observable<any>;
-  displayedColumns: string[] = ['nombre', 'inicio', 'fin'];
+  displayedColumns: string[] = ['nombre', 'inicio', 'fin', 'editar', 'eliminar'];
 
   
   constructor(
     public dialog: MatDialog,
-    private cursosServicio: ServiciosCursoService
+    private cursosServicio: ServiciosCursoService,
   ) { }
   
   ngOnInit(): void {
@@ -35,6 +35,20 @@ export class ListaCursosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.subscripcion.unsubscribe();
+  }
+
+  editarCurso(value: any){
+    const observableCurso = this.dialog.open(AbmCursosComponent,{
+      data: value
+    }).afterClosed();
+    this.subscripcion = observableCurso.subscribe(result => {
+      this.cursos$ = this.cursosServicio.obtenerCursoMod();
+    });
+
+  }
+
+  eliminarCurso(id: number){
+    this.cursos$ = this.cursosServicio.eliminarCurso(id);
   }
 
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service';
 
 @Component({
@@ -15,13 +15,15 @@ export class AbmCursosComponent implements OnInit {
     fechaInicio: new FormControl('', Validators.required),
     fechaFin: new FormControl('', Validators.required)
   });
-  data: boolean = false;
   constructor(public servicioCursos: ServiciosCursoService,
     public dialogRef: MatDialogRef<AbmCursosComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
     ) { }
 
   ngOnInit(): void {
-
+    if(this.data){
+      this.formCurso.setValue(this.data);
+    }
   }
 
   guardar(){
