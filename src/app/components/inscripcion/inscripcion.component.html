@@ -18,7 +18,7 @@
     <ng-container matColumnDef="inscribirAlumno">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element"> 
-            <button matTooltip="Inscribir alumno" [matTooltipShowDelay]="1000" [matTooltipHideDelay]="1" [matTooltipPosition]="'above'" aria-placeholder="Inscribir alumno" mat-mini-fab color="primary" (click)="inscribirAlumno(element.id)">
+            <button matTooltip="Inscribir alumno" [matTooltipShowDelay]="1000" [matTooltipHideDelay]="1" [matTooltipPosition]="'above'" aria-placeholder="Inscribir alumno" mat-mini-fab color="primary" (click)="inscribirAlumno(element)">
             <mat-icon>add</mat-icon>
             </button>
         </td>

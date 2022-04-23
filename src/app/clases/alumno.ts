@@ -1,3 +1,4 @@
+import { Curso } from "./curso";
 import { Persona } from "./persona";
 
 export class Alumno extends Persona {
@@ -10,6 +11,7 @@ export class Alumno extends Persona {
     public fechaIngreso?: Date,
     public edad?: number,
     public fechaNacimiento?: Date,
+    public cursos?: number[]
     ){
         super();
         this.promedio = 0;

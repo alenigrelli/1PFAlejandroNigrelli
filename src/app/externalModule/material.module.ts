@@ -13,6 +13,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatOptionModule } from "@angular/material/core";
+import { MatSelectModule } from "@angular/material/select";
 
 
 
@@ -32,7 +34,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         MatFormFieldModule,
         MatInputModule,
         MatDatepickerModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatOptionModule,
+        MatSelectModule
 
     ]
 })

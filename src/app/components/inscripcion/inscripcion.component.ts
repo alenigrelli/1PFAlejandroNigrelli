@@ -13,7 +13,7 @@ export class InscripcionComponent implements OnInit {
 
   constructor(
     private cursosServicio: ServiciosCursoService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) { }
   subscripcion!: Subscription;
   cursos$!: Observable<any>;
@@ -23,9 +23,11 @@ export class InscripcionComponent implements OnInit {
     this.cursos$ = this.cursosServicio.obtenerCurso();
   }
 
-  inscribirAlumno(idCurso: number) {
+  inscribirAlumno(curso: any) {
 
-    const observableCurso = this.dialog.open(InscripcionFormComponent).afterClosed();
+    const observableCurso = this.dialog.open(InscripcionFormComponent,{
+      data: curso
+    }).afterClosed();
     this.subscripcion = observableCurso.subscribe(result => {
       this.cursos$ = this.cursosServicio.obtenerCursoMod();
     });

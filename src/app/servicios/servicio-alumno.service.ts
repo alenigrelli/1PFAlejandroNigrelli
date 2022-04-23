@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { filter, map,  Observable, Subject, Subscription } from 'rxjs';
+import { filter, map,  Observable, of, Subject, Subscription } from 'rxjs';
 import { Alumno } from '../clases/alumno';
 import { HttpClient } from '@angular/common/http';
 import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
@@ -53,7 +53,14 @@ export class ServicioAlumnoService implements OnDestroy {
     return alumnosDesPromise;
   }
 
+  obtenerAlumnosCurso(idCurso: number){
+    console.log(idCurso);
+    return this.obtenerAlumnos()
+    .pipe(map(alumnos => alumnos.filter((alumno: Alumno) => alumno.cursos?.includes(idCurso))));
+  }
+
   ngOnDestroy(): void {
     this.alumnoSubscripcion.unsubscribe();
   }
+
 }
