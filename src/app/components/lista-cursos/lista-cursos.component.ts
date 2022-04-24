@@ -4,6 +4,7 @@ import { MatTable } from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
 import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service';
 import { AbmCursosComponent } from '../abm-cursos/abm-cursos.component';
+import { DetalleCursoComponent } from '../detalle-curso/detalle-curso.component';
 
 @Component({
   selector: 'app-lista-cursos',
@@ -14,7 +15,7 @@ export class ListaCursosComponent implements OnInit, OnDestroy {
   @ViewChild(MatTable) table!: MatTable<any>;
   subscripcion!: Subscription;
   cursos$!: Observable<any>;
-  displayedColumns: string[] = ['nombre', 'inicio', 'fin', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['nombre', 'inicio', 'fin','verMas', 'editar', 'eliminar'];
 
   
   constructor(
@@ -49,6 +50,12 @@ export class ListaCursosComponent implements OnInit, OnDestroy {
 
   eliminarCurso(id: number){
     this.cursos$ = this.cursosServicio.eliminarCurso(id);
+  }
+
+  verMas(curso: any){
+    this.dialog.open(DetalleCursoComponent,{
+      data: curso
+    })
   }
 
 }

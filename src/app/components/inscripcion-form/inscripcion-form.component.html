@@ -7,11 +7,15 @@
         </td>
     </tr>
     <div >
-      <mat-select  [(value)]="alumnoSeleccionado" name="alumnoSeleccionado">
-        <mat-option *ngFor="let alumno of alumnosSelect" [value]="alumno.id">
-          {{alumno.nombre}}
-        </mat-option>
-      </mat-select><button mat-button appStandardbutton (click)="agregar()">Agregar</button>
+      <mat-form-field appearance="fill">
+        <mat-label>Alumno</mat-label>
+        <mat-select  [(value)]="alumnoSeleccionado" name="alumnoSeleccionado">
+          <mat-option *ngFor="let alumno of alumnosSelect" [value]="alumno.id">
+            {{alumno.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-button appStandardbutton (click)="agregar()">Agregar</button>
 
         <table mat-table class="center" style="width: 100%;" [dataSource]="alumnos" class="mat-elevation-z8">
           <ng-container matColumnDef="nombre">
@@ -32,6 +36,15 @@
           <ng-container matColumnDef="nacimiento">
             <th mat-header-cell style="text-align: center;" *matHeaderCellDef appTamanoletra> Fecha de nacimiento </th>
             <td mat-cell style="text-align: center;" *matCellDef="let element"> {{element.fechaNacimiento}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="eliminar">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element"> 
+              <button mat-mini-fab color="primary" (click)="eliminarAlumnoCurso(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

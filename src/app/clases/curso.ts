@@ -3,7 +3,8 @@ export class Curso {
     public id?: number,
     public nombre?: string,
     public fechaInicio?: Date,
-    public fechaFin?: Date
+    public fechaFin?: Date,
+    public alumnos?: any
     ){}
 
 }

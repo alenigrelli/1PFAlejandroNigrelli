@@ -32,6 +32,13 @@ export class ServiciosCursoService {
     this.cursos.push(value);
   }
 
+  guardarAlumnos(idCurso: any, alumnos: any[]){
+    /* Pegarle al endpoint actualizando los alumnos del curso */
+    this.cursos.filter(curso => curso.id == idCurso).forEach(curso =>{
+      curso.alumnos = alumnos;
+    });
+  }
+
   eliminarCurso(id: number){
     this.cursos = this.cursos.filter( curso => curso.id !== id);
     return of(this.cursos);

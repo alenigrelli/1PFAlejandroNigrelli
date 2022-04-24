@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { ABMalumnosComponent } from '../abmalumnos/abmalumnos.component';
 import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
 import { Subscription } from 'rxjs';
+import { DetalleAlumnoComponent } from '../detalle-alumno/detalle-alumno.component';
 
 @Component({
   selector: 'app-lista-alumnos',
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class ListaAlumnosComponent implements OnInit, OnDestroy {
   alumnos!: Alumno[];
   dialogoEditar: boolean = false;
-  displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento', 'ingreso', 'matinscr', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento', 'ingreso', 'verMas', 'editar', 'eliminar'];
   dataSource: any;
   subscripcion!: Subscription;
   constructor(public dialog: MatDialog, private servicioAlumnos: ServicioAlumnoService) {
@@ -39,6 +40,12 @@ export class ListaAlumnosComponent implements OnInit, OnDestroy {
 
   agregarAlumno(){
     this.dialog.open(ABMalumnosComponent);
+  }
+
+  verMas(alumno: any){
+    this.dialog.open(DetalleAlumnoComponent,{
+      data: alumno
+    })
   }
 
   ngOnDestroy(): void {

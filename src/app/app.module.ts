@@ -24,6 +24,8 @@ import { AbmClasesComponent } from './components/abm-clases/abm-clases.component
 import { AbmProfesoresComponent } from './components/abm-profesores/abm-profesores.component';
 import { InscripcionComponent } from './components/inscripcion/inscripcion.component';
 import { InscripcionFormComponent } from './components/inscripcion-form/inscripcion-form.component';
+import { DetalleCursoComponent } from './components/detalle-curso/detalle-curso.component';
+import { DetalleAlumnoComponent } from './components/detalle-alumno/detalle-alumno.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,9 @@ import { InscripcionFormComponent } from './components/inscripcion-form/inscripc
     AbmClasesComponent,
     AbmProfesoresComponent,
     InscripcionComponent,
-    InscripcionFormComponent
+    InscripcionFormComponent,
+    DetalleCursoComponent,
+    DetalleAlumnoComponent
   ],
   imports: [
     BrowserModule,

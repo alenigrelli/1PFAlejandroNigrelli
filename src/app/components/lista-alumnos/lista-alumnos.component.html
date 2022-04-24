@@ -29,9 +29,13 @@
     <td mat-cell *matCellDef="let element"> {{element.fechaIngreso}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="matinscr">
-    <th mat-header-cell *matHeaderCellDef appTamanoletra> Cant. Mat. Insc. </th>
-    <td mat-cell *matCellDef="let element"> {{element.cantMatInscr}} </td>
+  <ng-container matColumnDef="verMas">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element"> 
+      <button mat-mini-fab color="primary" (click)="verMas(element)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="editar">

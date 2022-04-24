@@ -54,9 +54,23 @@ export class ServicioAlumnoService implements OnDestroy {
   }
 
   obtenerAlumnosCurso(idCurso: number){
-    console.log(idCurso);
     return this.obtenerAlumnos()
     .pipe(map(alumnos => alumnos.filter((alumno: Alumno) => alumno.cursos?.includes(idCurso))));
+  }
+
+  eliminarCurso(alumnoId: any, cursosId: any){
+    /* Pegarle al endpoint actualizando los cursos del alumno */
+    this.alumnos.filter((alumno: any) => alumno.id == alumnoId).forEach(alumno =>{
+      const cursos = alumno.cursos?.filter((curso: any) => curso.id != cursosId);
+      alumno.cursos = cursos;
+    });
+  }
+
+  agregarCurso(cursoId: any, alumnoIn: any){
+    this.alumnos.filter(alumno => alumno.id == alumnoIn.id).forEach(alumno =>{
+      alumno.cursos?.push(cursoId);
+      
+    })
   }
 
   ngOnDestroy(): void {
