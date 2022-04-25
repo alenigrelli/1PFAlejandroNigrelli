@@ -3,7 +3,7 @@ import { Alumno } from 'src/app/clases/alumno';
 import {MatDialog} from '@angular/material/dialog';
 import { ABMalumnosComponent } from '../abmalumnos/abmalumnos.component';
 import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
-import { Subscription } from 'rxjs';
+import { elementAt, Subscription } from 'rxjs';
 import { DetalleAlumnoComponent } from '../detalle-alumno/detalle-alumno.component';
 
 @Component({
@@ -28,7 +28,9 @@ export class ListaAlumnosComponent implements OnInit, OnDestroy {
 
 
   eliminarAlumno(id: number){
-    this.servicioAlumnos.eliminarAlumno(id);
+    this.servicioAlumnos.eliminarAlumno(id).subscribe(element =>{
+      this.servicioAlumnos.actualizaSubject();
+    });
   }
 
   editarAlumno(value: any){

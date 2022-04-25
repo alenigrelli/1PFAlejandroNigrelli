@@ -27,17 +27,17 @@ export class ABMalumnosComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.data) {
-      this.formAlumno.setValue(this.data)
+      this.formAlumno.setValue(this.data);
+      this.formAlumno.value.id = this.data.id || '';
     }
   }
 
   guardar(){
     if(this.formAlumno.status === 'VALID'){
-      if(!this.formAlumno.value.id)
-        this.formAlumno.value.id = Math.random();
-      
+      this.formAlumno.value.id = this.data.id || '';
       this.servicioAlumnos.guardarAlumno(this.formAlumno.value).subscribe(element =>{
         this.dialogRef.close();
+        this.servicioAlumnos.actualizaSubject(element);
       });
     }
   }
