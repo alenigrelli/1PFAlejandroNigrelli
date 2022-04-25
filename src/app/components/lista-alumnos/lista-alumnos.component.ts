@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Alumno } from 'src/app/clases/alumno';
 import {MatDialog} from '@angular/material/dialog';
 import { ABMalumnosComponent } from '../abmalumnos/abmalumnos.component';
-import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
 import { elementAt, Subscription } from 'rxjs';
 import { DetalleAlumnoComponent } from '../detalle-alumno/detalle-alumno.component';
+import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 
 @Component({
   selector: 'app-lista-alumnos',

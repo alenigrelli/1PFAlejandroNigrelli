@@ -9,13 +9,12 @@ import { ListaAlumnosComponent } from './components/lista-alumnos/lista-alumnos.
 import { MaterialModule } from './externalModule/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { CoreModule, FlexLayoutModule } from '@angular/flex-layout';
 import {ReactiveFormsModule} from '@angular/forms';
 import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
 import { TamanoletraDirective } from './directivas/tamanoletra.directive';
-import { ServicioAlumnoService } from './servicios/servicio-alumno.service';
 import { ListaCursosComponent } from './components/lista-cursos/lista-cursos.component';
-import { ServiciosCursoService } from './servicios/servicios-curso.service';
+import { ServiciosCursoService } from './core/servicios/servicios-curso.service';
 import { ConsultaAlumnosComponent } from './components/consulta-alumnos/consulta-alumnos.component';
 import { AbmCursosComponent } from './components/abm-cursos/abm-cursos.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -47,6 +46,7 @@ import { DetalleAlumnoComponent } from './components/detalle-alumno/detalle-alum
     DetalleAlumnoComponent
   ],
   imports: [
+    CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
@@ -55,7 +55,7 @@ import { DetalleAlumnoComponent } from './components/detalle-alumno/detalle-alum
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ServicioAlumnoService, ServiciosCursoService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

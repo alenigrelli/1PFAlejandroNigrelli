@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
-import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service';
+import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.service';
 import { InscripcionFormComponent } from '../inscripcion-form/inscripcion-form.component';
 
 @Component({

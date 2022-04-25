@@ -1,8 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { filter, map,  Observable, of, Subject, Subscription } from 'rxjs';
-import { Alumno } from '../clases/alumno';
+import { map,  Observable, of, Subject, Subscription } from 'rxjs';
+import { Alumno } from '../../clases/alumno';
 import { HttpClient } from '@angular/common/http';
-import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 
 @Injectable({
   providedIn: 'root'

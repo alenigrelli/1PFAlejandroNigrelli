@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
+import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 @Component({
   selector: 'app-abmalumnos',
   templateUrl: './abmalumnos.component.html',
@@ -34,7 +34,7 @@ export class ABMalumnosComponent implements OnInit {
 
   guardar(){
     if(this.formAlumno.status === 'VALID'){
-      this.formAlumno.value.id = this.data.id || '';
+      this.formAlumno.value.id = this.data?.id || '';
       this.servicioAlumnos.guardarAlumno(this.formAlumno.value).subscribe(element =>{
         this.dialogRef.close();
         this.servicioAlumnos.actualizaSubject(element);

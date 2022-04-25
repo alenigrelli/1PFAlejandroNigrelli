@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, Observable, Subscription } from 'rxjs';
 import { Alumno } from 'src/app/clases/alumno';
-import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
+import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 
 @Component({
   selector: 'app-consulta-alumnos',

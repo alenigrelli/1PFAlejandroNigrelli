@@ -3,8 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { combineLatest, forkJoin, Observable } from 'rxjs';
 import { Alumno } from 'src/app/clases/alumno';
-import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
-import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service';
+import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
+import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.service';
 
 @Component({
   selector: 'app-inscripcion-form',

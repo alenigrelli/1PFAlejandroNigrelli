@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service';
+import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.service';
 
 @Component({
   selector: 'app-abm-cursos',

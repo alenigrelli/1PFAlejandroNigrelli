@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
-import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service';
+import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.service';
 import { AbmCursosComponent } from '../abm-cursos/abm-cursos.component';
 import { DetalleCursoComponent } from '../detalle-curso/detalle-curso.component';
 
