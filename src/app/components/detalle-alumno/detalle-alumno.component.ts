@@ -1,7 +1,8 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { elementAt, forkJoin, Observable } from 'rxjs';
 import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
 import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service';
 
@@ -18,12 +19,14 @@ export class DetalleAlumnoComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public alumno: any,
     public servicioCursos: ServiciosCursoService,
-    public servicioAlumnos: ServicioAlumnoService
+    public servicioAlumnos: ServicioAlumnoService,
+    public dialogRef: MatDialogRef<DetalleAlumnoComponent>,
   ) {}
 
   ngOnInit(): void {
     this.servicioCursos.obtenerCurso().subscribe(cursos =>{
-      this.cursos =  cursos.filter((curso : any) => {return curso.alumnos?.includes(Number(this.alumno.id))});
+      this.cursos = cursos.filter((curso : any) => {return curso.alumnos?.includes(this.alumno.id)});
+      this.table.renderRows();
     });
   }
 
@@ -35,11 +38,14 @@ export class DetalleAlumnoComponent implements OnInit {
   }
 
   guardar(){
+    const observables: Observable<any>[] = []
     this.cursosEliminados.forEach((curso: any) =>{
-      const alumnos = curso.alumnos.filter((alumno: any) => alumno.id != this.alumno.id);
-      this.servicioCursos.guardarAlumnos(curso.id, alumnos);
-      this.servicioAlumnos.eliminarCurso(this.alumno.id, curso.id);
-
+      const alumnos = curso.alumnos.filter((alumno: any) => alumno.id != this.alumno.id) || [];
+      observables.push(this.servicioCursos.guardarAlumnos(curso.id, alumnos));
+      observables.push(this.servicioAlumnos.eliminarCurso(this.alumno.id, curso.id));
+    });
+    forkJoin(observables).subscribe(element =>{
+      this.dialogRef.close();
     })
   }
 

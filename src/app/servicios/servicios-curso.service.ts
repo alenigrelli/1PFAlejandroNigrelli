@@ -30,13 +30,17 @@ export class ServiciosCursoService {
   guardarCurso(value: any){
     this.cursos = this.cursos.filter( curso => curso.id !== value.id);
     this.cursos.push(value);
+    console.log(value);
+    return this.http.post('https://625608b68646add390e01368.mockapi.io/alumnos/v1/cursos',value);
   }
 
   guardarAlumnos(idCurso: any, alumnos: any[]){
-    /* Pegarle al endpoint actualizando los alumnos del curso */
+    let cursonuevo;
     this.cursos.filter(curso => curso.id == idCurso).forEach(curso =>{
-      curso.alumnos = alumnos;
+      curso.alumnos = alumnos.map( alumno => alumno.id);
+      cursonuevo = curso;
     });
+    return this.http.put('https://625608b68646add390e01368.mockapi.io/alumnos/v1/cursos/'+ idCurso + '/',cursonuevo);
   }
 
   eliminarCurso(id: number){

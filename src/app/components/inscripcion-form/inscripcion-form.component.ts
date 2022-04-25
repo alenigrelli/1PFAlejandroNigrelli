@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { combineLatest, forkJoin, Observable } from 'rxjs';
 import { Alumno } from 'src/app/clases/alumno';
 import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
 import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service';
@@ -27,18 +28,27 @@ export class InscripcionFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.servicioAlumno.obtenerAlumnos().subscribe(alumnos =>{
-      this.alumnos = alumnos.filter((alumno:  Alumno) => alumno.cursos?.includes(Number(this.curso.id)));
-      this.alumnosSelect = alumnos.filter( (alumno : Alumno) => !alumno.cursos?.includes(Number(this.curso.id)));
+      this.alumnos = alumnos.filter((alumno:  Alumno) => alumno.cursos?.includes(this.curso.id));
+      this.alumnosSelect = alumnos.filter( (alumno : Alumno) => !alumno.cursos?.includes(this.curso.id));
     });
   }
 
   guardar(){
-    this.servicioCurso.guardarAlumnos(this.curso.id, this.alumnos);
+    const observables: Observable<any>[] = [];
+    observables.push(this.servicioCurso.guardarAlumnos(this.curso.id, this.alumnos));
     this.alumnos.filter(alumno => !alumno.cursos?.includes(this.curso.id)).forEach(alumno =>{
-      this.servicioAlumno.agregarCurso(this.curso.id, alumno);
-    })
-    this.dialogRef.close();
-  }
+      observables.push(this.servicioAlumno.agregarCurso(this.curso.id, alumno));
+    });
+      const fork =  forkJoin(observables);
+      fork.subscribe( element =>{
+        try{
+          this.dialogRef.close();
+        }catch{
+          console.error('errro al guardar los alumnos');
+        };
+      }
+      );
+    }
 
   agregar(){
     const alumno: any = this.alumnosSelect.find(alumno => alumno.id == this.alumnoSeleccionado);

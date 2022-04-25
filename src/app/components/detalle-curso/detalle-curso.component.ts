@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { Curso } from 'src/app/clases/curso';
-import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
+import { forkJoin, Observable } from 'rxjs';
+  import { ServicioAlumnoService } from 'src/app/servicios/servicio-alumno.service';
 import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { ServiciosCursoService } from 'src/app/servicios/servicios-curso.service
 export class DetalleCursoComponent implements OnInit {
   alumnos!: any[];
   displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento', 'eliminar'];
-  alumnosEliminados!: any[];
+  alumnosEliminados: any[] = [];
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(
@@ -24,25 +24,28 @@ export class DetalleCursoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.servicioAlumnos.obtenerAlumnosCurso(Number(this.curso.id)).subscribe(alumnos =>{
+    this.servicioAlumnos.obtenerAlumnosCurso(this.curso.id).subscribe(alumnos =>{
       this.alumnos = alumnos;
-
       this.table.renderRows();
     });
   }
 
   eliminarAlumnoCurso(alumnoIn:any){
-
     this.alumnos = this.alumnos.filter(alumno => alumno.id != alumnoIn.id);
+    this.alumnosEliminados.push(alumnoIn);
     this.table.renderRows();
   }
 
   guardar(){
-    this.servicioCurso.guardarAlumnos(this.curso.id, this.alumnos);
+    const observables: Observable<any>[] = [];
+    observables.push(this.servicioCurso.guardarAlumnos(this.curso.id, this.alumnos));
     this.alumnosEliminados.forEach(alumno =>{
-      this.servicioAlumnos.eliminarCurso(alumno.id, this.curso.id);
+      console.log(alumno);
+      observables.push(this.servicioAlumnos.eliminarCurso(alumno.id, this.curso.id));
     })
-    this.dialogRef.close()
+    forkJoin(observables).subscribe(element =>{
+      this.dialogRef.close()
+    });
   }
 
 }

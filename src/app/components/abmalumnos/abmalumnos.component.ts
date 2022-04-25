@@ -36,8 +36,9 @@ export class ABMalumnosComponent implements OnInit {
       if(!this.formAlumno.value.id)
         this.formAlumno.value.id = Math.random();
       
-      this.servicioAlumnos.guardarAlumno(this.formAlumno.value);
-      this.dialogRef.close();
+      this.servicioAlumnos.guardarAlumno(this.formAlumno.value).subscribe(element =>{
+        this.dialogRef.close();
+      });
     }
   }
 
