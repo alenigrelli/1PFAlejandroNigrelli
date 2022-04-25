@@ -28,10 +28,8 @@ export class AbmCursosComponent implements OnInit {
 
   guardar(){
     if(this.formCurso.status === 'VALID'){
-      if(!this.formCurso.value.id)
-        this.formCurso.value.id = (Math.floor(Math.random() * 1000) + 1).toString();
+      this.formCurso.value.id = this.data?.id || '';
       this.servicioCursos.guardarCurso(this.formCurso.value).subscribe(element =>{
-        console.log(element);
         this.dialogRef.close();
       });
     }
