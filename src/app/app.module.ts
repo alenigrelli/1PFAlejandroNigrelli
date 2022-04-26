@@ -11,7 +11,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { CoreModule, FlexLayoutModule } from '@angular/flex-layout';
 import {ReactiveFormsModule} from '@angular/forms';
-import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
 import { TamanoletraDirective } from './directivas/tamanoletra.directive';
 import { ListaCursosComponent } from './components/lista-cursos/lista-cursos.component';
 import { ServiciosCursoService } from './core/servicios/servicios-curso.service';
@@ -25,6 +24,7 @@ import { InscripcionComponent } from './components/inscripcion/inscripcion.compo
 import { InscripcionFormComponent } from './components/inscripcion-form/inscripcion-form.component';
 import { DetalleCursoComponent } from './components/detalle-curso/detalle-curso.component';
 import { DetalleAlumnoComponent } from './components/detalle-alumno/detalle-alumno.component';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +32,6 @@ import { DetalleAlumnoComponent } from './components/detalle-alumno/detalle-alum
     ListaAlumnosComponent,
     NavbarComponent,
     ToolbarComponent,
-    NombreApellidoPipe,
     TamanoletraDirective,
     ListaCursosComponent,
     ConsultaAlumnosComponent,
@@ -46,6 +45,7 @@ import { DetalleAlumnoComponent } from './components/detalle-alumno/detalle-alum
     DetalleAlumnoComponent
   ],
   imports: [
+    SharedModule,
     CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -55,7 +55,7 @@ import { DetalleAlumnoComponent } from './components/detalle-alumno/detalle-alum
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [SharedModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,7 +8,7 @@
     <table mat-table class="center" style="width: 100%;" [dataSource]="alumnos" class="mat-elevation-z8">
       <ng-container matColumnDef="nombre">
         <th  mat-header-cell style="text-align: center;" appTamanoletra *matHeaderCellDef> Nombre Completo</th>
-        <td mat-cell style="text-align: center;"  *matCellDef="let element"> {{element | nombreApellido}} </td>
+        <td mat-cell style="text-align: center;"  *matCellDef="let element"> {{element | NombreApellido}} </td>
       </ng-container>
       
       <ng-container matColumnDef="dni">
