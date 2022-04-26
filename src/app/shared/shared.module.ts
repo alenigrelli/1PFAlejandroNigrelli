@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
 import { StandardbuttonDirective } from './directivas/standardbutton.directive';
 import { Tamanoletra } from './directivas/tamanoletra.directive';
+import { MaterialModule } from './material.module';
 
 
 
@@ -11,10 +12,11 @@ import { Tamanoletra } from './directivas/tamanoletra.directive';
     NombreApellidoPipe, StandardbuttonDirective, Tamanoletra
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule
   ],
   exports: [
-    NombreApellidoPipe, StandardbuttonDirective, Tamanoletra
+    NombreApellidoPipe, StandardbuttonDirective, Tamanoletra, MaterialModule
   ]
 })
 export class SharedModule { }

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './externalModule/material.module';
+import { MaterialModule } from './shared/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { toolbarComponent } from './components/toolbar/toolbar.component';
 import { CoreModule, FlexLayoutModule } from '@angular/flex-layout';
@@ -36,7 +36,6 @@ import { CursoModule } from './curso/curso.module';
     CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule,
