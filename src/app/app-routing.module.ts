@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ConsultaAlumnosComponent } from './alumno/consulta-alumnos/consulta-alumnos.component';
 import { InscripcionComponent } from './components/inscripcion/inscripcion.component';
 import { ListaAlumnosComponent } from './alumno/lista-alumnos/lista-alumnos.component';
-import { ListaCursosComponent } from './components/lista-cursos/lista-cursos.component';
+import { ListaCursosComponent } from './curso/lista-cursos/lista-cursos.component';
 
 const routes: Routes = [
   { path: 'listaAlumnos', component: ListaAlumnosComponent },
