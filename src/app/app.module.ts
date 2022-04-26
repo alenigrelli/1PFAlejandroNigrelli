@@ -4,8 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { toolbarComponent } from './components/toolbar/toolbar.component';
-import { CoreModule, FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AbmClasesComponent } from './components/abm-clases/abm-clases.component';
@@ -14,11 +13,12 @@ import { SharedModule } from './shared/shared.module';
 import { AlumnoModule } from './alumno/alumno.module';
 import { CursoModule } from './curso/curso.module';
 import { InscripcionModule } from './inscripcion/inscripcion.module';
+import { CoreModule } from './core/core.module';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    toolbarComponent,
     AbmClasesComponent,
     AbmProfesoresComponent,
   ],
