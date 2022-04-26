@@ -8,6 +8,7 @@ import { DetalleCursoComponent } from './detalle-curso/detalle-curso.component';
 import { AlumnoModule } from '../alumno/alumno.module';
 import { ListaCursosComponent } from './lista-cursos/lista-cursos.component';
 import { CoreModule } from '../core/core.module';
+import { InscripcionModule } from '../inscripcion/inscripcion.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CoreModule } from '../core/core.module';
     CoreModule,
     AlumnoModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    InscripcionModule
   ],
   exports:[
     ListaCursosComponent

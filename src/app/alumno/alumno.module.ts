@@ -7,6 +7,7 @@ import { ConsultaAlumnosComponent } from './consulta-alumnos/consulta-alumnos.co
 import { ListaAlumnosComponent } from './lista-alumnos/lista-alumnos.component';
 import { DetalleAlumnoComponent } from './detalle-alumno/detalle-alumno.component';
 import { CoreModule } from '../core/core.module';
+import { InscripcionModule } from '../inscripcion/inscripcion.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { CoreModule } from '../core/core.module';
     SharedModule,
     CoreModule,
     ReactiveFormsModule,
+    InscripcionModule,
     CommonModule
   ],
   exports:[
