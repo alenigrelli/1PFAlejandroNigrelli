@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import {MatButtonModule} from '@angular/material/button';
 import { MatTableModule} from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
+import {MatIcon, MatIconModule} from '@angular/material/icon';
 import { MatSidenavModule} from  '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -37,7 +37,6 @@ import { MatSelectModule } from "@angular/material/select";
         MatTooltipModule,
         MatOptionModule,
         MatSelectModule
-
     ]
 })
 

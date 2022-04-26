@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Alumno } from 'src/app/clases/alumno';
 import {MatDialog} from '@angular/material/dialog';
-import { ABMalumnosComponent } from '../abmalumnos/abmalumnos.component';
+import { abmalumnosComponent } from '../abmalumnos/abmalumnos.component';
 import { elementAt, Subscription } from 'rxjs';
 import { DetalleAlumnoComponent } from '../detalle-alumno/detalle-alumno.component';
 import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
@@ -34,14 +34,14 @@ export class ListaAlumnosComponent implements OnInit, OnDestroy {
   }
 
   editarAlumno(value: any){
-    this.dialog.open(ABMalumnosComponent,{
+    this.dialog.open(abmalumnosComponent,{
       data: value
     });
 
   }
 
   agregarAlumno(){
-    this.dialog.open(ABMalumnosComponent);
+    this.dialog.open(abmalumnosComponent);
   }
 
   verMas(alumno: any){

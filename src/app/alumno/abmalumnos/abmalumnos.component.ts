@@ -3,11 +3,11 @@ import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 @Component({
-  selector: 'app-abmalumnos',
+  selector: 'abmalumnos',
   templateUrl: './abmalumnos.component.html',
   styleUrls: ['./abmalumnos.component.css']
 })
-export class ABMalumnosComponent implements OnInit {
+export class abmalumnosComponent implements OnInit {
   formAlumno: FormGroup = new FormGroup({
     id: new FormControl(''),
     dni: new FormControl('', Validators.required),
@@ -21,7 +21,7 @@ export class ABMalumnosComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private servicioAlumnos: ServicioAlumnoService,
-    public dialogRef: MatDialogRef<ABMalumnosComponent>,
+    public dialogRef: MatDialogRef<abmalumnosComponent>,
   ){
   }
 
