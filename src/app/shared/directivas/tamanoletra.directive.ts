@@ -1,9 +1,9 @@
 import { Directive, ElementRef, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[appTamanoletra]'
+  selector: '[Tamanoletra]'
 })
-export class TamanoletraDirective implements OnInit {
+export class Tamanoletra implements OnInit {
 
   constructor(private elemento: ElementRef) {
   }
