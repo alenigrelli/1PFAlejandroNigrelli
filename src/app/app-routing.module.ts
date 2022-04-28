@@ -6,8 +6,11 @@ import { ListaAlumnosComponent } from './alumno/lista-alumnos/lista-alumnos.comp
 import { ListaCursosComponent } from './curso/lista-cursos/lista-cursos.component';
 
 const routes: Routes = [
+  {
+    path: 'alumnos',
+    loadChildren: () => import('./alumno/alumno.module').then((m) => m.AlumnoModule)
+  },
   { path: 'listaAlumnos', component: ListaAlumnosComponent },
-  { path: 'consultaAlumnos', component: ConsultaAlumnosComponent },
   { path: 'listaCursos', component: ListaCursosComponent },
   {path: 'inscripcion', component: InscripcionComponent},
   { path: '', component: ListaAlumnosComponent }
