@@ -35,7 +35,8 @@ export class abmalumnosComponent implements OnInit {
   guardar(){
     if(this.formAlumno.status === 'VALID'){
       this.formAlumno.value.id = this.data?.id || '';
-      this.servicioAlumnos.guardarAlumno(this.formAlumno.value).subscribe(element =>{
+      this.servicioAlumnos.guardarAlumno(this.formAlumno.value)
+      .subscribe(element =>{
         this.dialogRef.close();
         this.servicioAlumnos.actualizaSubject(element);
       });

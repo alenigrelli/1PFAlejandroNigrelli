@@ -11,7 +11,6 @@ export class ServiciosCursoService {
   cursoSubject!: Subject<any>;
   cursos!: any[] ;
   constructor(private http: HttpClient) {
-    
   }
 
   obtenerCurso(): Observable<any> {

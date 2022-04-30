@@ -11,9 +11,10 @@ const routes: Routes = [
     path: 'alumnos',
     loadChildren: () => import('./alumno/alumno.module').then((m) => m.AlumnoModule)
   },
+  { 
+    path: 'cursos', loadChildren: () => import('./curso/curso.module').then(m => m.CursoModule)
+  },
   {path: 'login', component: LoginComponent},
-  { path: 'listaAlumnos', component: ListaAlumnosComponent },
-  { path: 'listaCursos', component: ListaCursosComponent },
   {path: 'inscripcion', component: InscripcionComponent},
   { path: '', component: ListaAlumnosComponent },
 

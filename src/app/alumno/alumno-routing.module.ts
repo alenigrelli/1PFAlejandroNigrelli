@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ListaAlumnosComponent } from './lista-alumnos/lista-alumnos.component';
 import { ConsultaAlumnosComponent } from './consulta-alumnos/consulta-alumnos.component';
+import { AuthGuard } from '../core/auth.guard';
 
 const routes: Routes = [
-  {path: '',
+  {path: 'alumnos',
     children: [
-      { path: 'consultaAlumnos', component: ConsultaAlumnosComponent }
+      { path: 'consultaAlumnos', canActivate: [AuthGuard],component: ConsultaAlumnosComponent },
+      {path: 'listaAlumnos', canActivate: [AuthGuard], component: ListaAlumnosComponent}
     ]
   }
 ]

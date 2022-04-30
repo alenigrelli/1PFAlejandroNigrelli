@@ -1,4 +1,4 @@
-import { Persona } from "./persona";
+import { usuario } from "./usuario";
 
-export class Profesor extends Persona {
+export class Profesor extends usuario {
 }

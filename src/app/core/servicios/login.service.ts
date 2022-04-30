@@ -11,7 +11,7 @@ export class LoginService {
   constructor(private router: Router) { }
 
   usuarioLogueado(){
-    return this.logueado;
+    return false;//this.logueado;
   }
 
   loguearse(){

@@ -41,6 +41,7 @@ export class ServicioAlumnoService implements OnDestroy {
       this.alumnos = alumnos;
       this.alumnoSubject.next(this.alumnos);
     });
+    
 
     return this.alumnoSubject;
   }
