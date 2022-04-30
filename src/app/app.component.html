@@ -1,17 +1,22 @@
-<mat-toolbar color="primary" style="background-color: #005b8f;">
-    <div>
-        <button mat-icon-button (click)="sidenav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-    </div>
-    <a mat-button appTamanoletra>UNC</a>
-</mat-toolbar>
+<div *ngIf="usuarioLogueado" fxFlexFill>
+    <mat-toolbar color="primary" style="background-color: #005b8f;">
+        <div>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+        <a mat-button appTamanoletra>UNC</a>
+    </mat-toolbar>
 
-<mat-sidenav-container fxFlexFill>
-    <mat-sidenav #sidenav fxLayout="column" mode="side" style="background-color: blues;" opened="true">
-        <app-toolbar></app-toolbar>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+    <mat-sidenav-container  fxFlexFill>
+        <mat-sidenav  #sidenav fxLayout="column" mode="side" style="background-color: blues;" opened="true">
+            <app-toolbar></app-toolbar>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+<div *ngIf="!usuarioLogueado">
+    <app-login></app-login>
+</div>

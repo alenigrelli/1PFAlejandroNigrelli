@@ -14,6 +14,7 @@ import { AlumnoModule } from './alumno/alumno.module';
 import { CursoModule } from './curso/curso.module';
 import { InscripcionModule } from './inscripcion/inscripcion.module';
 import { CoreModule } from './core/core.module';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CoreModule } from './core/core.module';
     NavbarComponent,
     AbmClasesComponent,
     AbmProfesoresComponent,
+    LoginComponent,
   ],
   imports: [
     InscripcionModule,

@@ -51,6 +51,6 @@ export class ListaAlumnosComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.subscripcion.unsubscribe();
+      this.subscripcion?.unsubscribe();
   }
 }

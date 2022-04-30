@@ -4,6 +4,7 @@ import { ServiciosCursoService } from './servicios/servicios-curso.service';
 import { ServicioAlumnoService } from './servicios/servicio-alumno.service';
 import { SharedModule } from '../shared/shared.module';
 import { toolbarComponent } from './toolbar/toolbar.component';
+import { LoginService } from './servicios/login.service';
 
 
 
@@ -16,6 +17,6 @@ import { toolbarComponent } from './toolbar/toolbar.component';
     SharedModule
   ],
   exports:[toolbarComponent],
-  providers: [ServicioAlumnoService, ServiciosCursoService, toolbarComponent]
+  providers: [ServicioAlumnoService, ServiciosCursoService, LoginService]
 })
 export class CoreModule { }
