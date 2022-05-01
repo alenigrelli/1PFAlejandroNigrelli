@@ -4,6 +4,7 @@ import { InscripcionComponent } from './inscripcion/inscripcion.component';
 import { InscripcionFormComponent } from './inscripcion-form/inscripcion-form.component';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
+import { InscripcionRoutingModule } from './inscripcion-routing.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { CoreModule } from '../core/core.module';
   imports: [
     SharedModule,
     CoreModule,
-    CommonModule
+    CommonModule,
+    InscripcionRoutingModule
   ],
   exports: [InscripcionFormComponent]
 })

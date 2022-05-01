@@ -11,7 +11,7 @@ export class LoginService {
   constructor(private router: Router) { }
 
   usuarioLogueado(){
-    return false;//this.logueado;
+    return (localStorage.getItem('logueado') === 'true');
   }
 
   loguearse(){
