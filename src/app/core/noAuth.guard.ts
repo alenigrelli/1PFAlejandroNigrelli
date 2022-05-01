@@ -6,7 +6,7 @@ import { LoginService } from './servicios/login.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class NoAuthGuard implements CanActivate {
   constructor(
     private login: LoginService,
     private router: Router
@@ -15,13 +15,12 @@ export class AuthGuard implements CanActivate {
   }
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {      
-      if(this.login.usuarioLogueado()){
-        return true;
-      }else{
-        alert("No puede a esa ruta por que no se encuentra logueado");
-        this.router.navigateByUrl('/login')
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if(this.login.usuarioLogueado()){
+        this.router.navigateByUrl('/alumnos/listaAlumnos')
         return false;
-      }
+    }else{
+        return true;
+    }
   }
 }

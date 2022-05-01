@@ -5,6 +5,8 @@ import { InscripcionComponent } from './inscripcion/inscripcion/inscripcion.comp
 import { ListaAlumnosComponent } from './alumno/lista-alumnos/lista-alumnos.component';
 import { ListaCursosComponent } from './curso/lista-cursos/lista-cursos.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './core/auth.guard';
+import { NoAuthGuard } from './core/noAuth.guard';
 
 const routes: Routes = [
   {
@@ -14,9 +16,12 @@ const routes: Routes = [
   { 
     path: 'cursos', loadChildren: () => import('./curso/curso.module').then(m => m.CursoModule)
   },
-  {path: 'login', component: LoginComponent},
-  {path: 'inscripcion', component: InscripcionComponent},
-  { path: '', component: ListaAlumnosComponent },
+  { 
+    path: 'inscripcion', loadChildren: () => import('./inscripcion/inscripcion.module').then(m => m.InscripcionModule)
+  },
+  {path: '', component: ListaAlumnosComponent },
+  {path: 'login', canActivate: [NoAuthGuard], component: LoginComponent},
+
 
 ];
 
