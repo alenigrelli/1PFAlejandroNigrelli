@@ -16,7 +16,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.usuarioLogueado = localStorage.getItem('logueado') === 'true';
+    this.servicioLogin.usuarioLogueado().subscribe(logueado =>{
+      this.usuarioLogueado = logueado;
+    });
   }
 
 }

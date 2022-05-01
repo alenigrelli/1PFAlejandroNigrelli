@@ -30,8 +30,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
+    this.servicioLogin.loguearse(this.formLogin.value.username, this.formLogin.value.password)
+    .subscribe(alumno =>{
+      if(alumno.length === 1){
+        this.servicioLogin.usuarioLogueado();
+      }else{
+        alert("el usuario o contraseña no existe!")
+      }
+    });
 
-    this.servicioLogin.loguearse();
-    this.router.navigate(['listaAlumnos']);
+   
   }
 }

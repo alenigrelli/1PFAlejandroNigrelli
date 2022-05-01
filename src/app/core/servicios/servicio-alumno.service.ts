@@ -86,6 +86,11 @@ export class ServicioAlumnoService implements OnDestroy {
     return this.http.put('https://625608b68646add390e01368.mockapi.io/alumnos/v1/alumnos/'+alumnoIn.id + '/',alumnoIn);
   }
 
+  loginUsuario(email: any, contraseña: any){
+    return  this.obtenerAlumnos()
+    .pipe(map(alumnos => alumnos.filter((alumno: Alumno) => alumno.email === email && alumno.contraseña === contraseña)));
+  }
+
   ngOnDestroy(): void {
     this.alumnoSubscripcion.unsubscribe();
   }

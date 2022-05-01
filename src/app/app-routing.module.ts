@@ -13,16 +13,18 @@ const routes: Routes = [
     path: 'alumnos',
     loadChildren: () => import('./alumno/alumno.module').then((m) => m.AlumnoModule)
   },
+  
   { 
     path: 'cursos', loadChildren: () => import('./curso/curso.module').then(m => m.CursoModule)
   },
+
   { 
     path: 'inscripcion', loadChildren: () => import('./inscripcion/inscripcion.module').then(m => m.InscripcionModule)
   },
+
   {path: '', component: ListaAlumnosComponent },
+
   {path: 'login', canActivate: [NoAuthGuard], component: LoginComponent},
-
-
 ];
 
 @NgModule({
