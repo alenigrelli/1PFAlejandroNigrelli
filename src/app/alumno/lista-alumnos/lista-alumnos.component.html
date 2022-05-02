@@ -1,4 +1,4 @@
-<div style="text-align: right; margin-right: 20px;">
+<div *ngIf="esAdmin()" style="text-align: right; margin-right: 20px;">
 <button mat-mini-fab color="primary"  (click)="agregarAlumno()" >
   <mat-icon >add</mat-icon>
 </button>
@@ -38,7 +38,7 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="editar">
+  <ng-container *ngIf="esAdmin()" matColumnDef="editar">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element"> 
       <button mat-mini-fab color="primary" (click)="editarAlumno(element)">
@@ -47,7 +47,7 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="eliminar">
+  <ng-container *ngIf="esAdmin()" matColumnDef="eliminar">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element"> 
       <button mat-mini-fab color="primary" (click)="eliminarAlumno(element.id)">

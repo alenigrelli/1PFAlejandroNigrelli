@@ -49,7 +49,7 @@
           <td mat-cell  *matCellDef="let element"> {{element.fechaFin | date: 'dd/mm/yyyy'}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="eliminar">
+    <ng-container *ngIf="esAdmin" matColumnDef="eliminar">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element"> 
         <button mat-mini-fab color="primary" (click)="eliminarInscripcion(element)">

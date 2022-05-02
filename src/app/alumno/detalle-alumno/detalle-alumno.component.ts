@@ -5,6 +5,7 @@ import { MatTable } from '@angular/material/table';
 import { elementAt, forkJoin, Observable } from 'rxjs';
 import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.service';
+import { UsuarioService } from 'src/app/core/servicios/usuario.service';
 
 @Component({
   selector: 'app-detalle-alumno',
@@ -13,14 +14,16 @@ import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.se
 })
 export class DetalleAlumnoComponent implements OnInit {
   cursos: any;
-  displayedColumns: string[] = ['nombre', 'inicio', 'fin', 'eliminar'];
+  displayedColumns: string[] = ['nombre', 'inicio', 'fin'];
   cursosEliminados: any = [];
+  esAdmin: boolean = false;
   @ViewChild(MatTable) table!: MatTable<any>;
   constructor(
     @Inject(MAT_DIALOG_DATA) public alumno: any,
     public servicioCursos: ServiciosCursoService,
     public servicioAlumnos: ServicioAlumnoService,
     public dialogRef: MatDialogRef<DetalleAlumnoComponent>,
+    private servicioUsuario: UsuarioService
   ) {}
 
   ngOnInit(): void {
@@ -28,6 +31,12 @@ export class DetalleAlumnoComponent implements OnInit {
       this.cursos = cursos.filter((curso : any) => {return curso.alumnos?.includes(this.alumno.id)});
       this.table.renderRows();
     });
+    if(this.servicioUsuario.esAdmin()){
+      this.displayedColumns.push('eliminar');
+      this.esAdmin = true;
+    }else{
+      this.esAdmin = false;
+    }
   }
 
   eliminarInscripcion(cursoIn: any){

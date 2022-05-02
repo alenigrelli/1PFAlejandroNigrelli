@@ -5,6 +5,7 @@ import { abmalumnosComponent } from '../abmalumnos/abmalumnos.component';
 import { elementAt, Subscription } from 'rxjs';
 import { DetalleAlumnoComponent } from '../detalle-alumno/detalle-alumno.component';
 import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
+import { UsuarioService } from 'src/app/core/servicios/usuario.service';
 
 @Component({
   selector: 'app-lista-alumnos',
@@ -14,16 +15,22 @@ import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.se
 export class ListaAlumnosComponent implements OnInit, OnDestroy {
   alumnos!: Alumno[];
   dialogoEditar: boolean = false;
-  displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento', 'ingreso', 'verMas', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento', 'ingreso', 'verMas'];
   dataSource: any;
   subscripcion!: Subscription;
-  constructor(public dialog: MatDialog, private servicioAlumnos: ServicioAlumnoService) {
+  constructor(public dialog: MatDialog, 
+    private servicioAlumnos: ServicioAlumnoService,
+    private servicioUsuario: UsuarioService) {
   }
 
   ngOnInit(): void {
     this.subscripcion = this.servicioAlumnos.obtenerAlumnos().subscribe( alumnos =>{
       this.alumnos = alumnos;
     })
+    if(this.esAdmin()){
+      this.displayedColumns.push('editar');
+      this.displayedColumns.push('eliminar');
+    }
   }
 
 
@@ -49,6 +56,12 @@ export class ListaAlumnosComponent implements OnInit, OnDestroy {
       data: alumno
     })
   }
+
+  esAdmin(){
+    return this.servicioUsuario.esAdmin();
+  }
+
+
 
   ngOnDestroy(): void {
       this.subscripcion?.unsubscribe();
