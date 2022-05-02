@@ -20,14 +20,13 @@ export class LoginService {
     
     if(usuarioLogueado){
       logueado = true;
-      this.subjectUsuarioLogueado.next(logueado)
     }
+    this.subjectUsuarioLogueado.next(logueado);
     return this.subjectUsuarioLogueado;
   }
 
   Logueado(){
     let usuarioLogueado = localStorage.getItem('usuarioLogueado') || '';
-    
     if(usuarioLogueado){
       return true;
     }

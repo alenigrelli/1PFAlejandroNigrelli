@@ -6,7 +6,7 @@ import { LoginService } from './core/servicios/login.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = '1PFAlejandroNigrelli';
   usuarioLogueado!: boolean;
   constructor(
@@ -19,6 +19,10 @@ export class AppComponent implements OnInit {
     this.servicioLogin.usuarioLogueado().subscribe(logueado =>{
       this.usuarioLogueado = logueado;
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.usuarioLogueado = this.servicioLogin.Logueado();
   }
 
 }
