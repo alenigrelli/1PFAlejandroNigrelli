@@ -5,6 +5,7 @@ import { combineLatest, forkJoin, Observable } from 'rxjs';
 import { Alumno } from 'src/app/clases/alumno';
 import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.service';
+import { UsuarioService } from 'src/app/core/servicios/usuario.service';
 
 @Component({
   selector: 'app-inscripcion-form',
@@ -13,16 +14,18 @@ import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.se
 })
 export class InscripcionFormComponent implements OnInit {
   @ViewChild(MatTable) tabla!: MatTable<any>;
-  displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento', 'eliminar'];
+  displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento'];
   dataSource: any;
   alumnos!: Alumno[];
   alumnosSelect!: Alumno[];
   alumnoSeleccionado!: any;
+  esAdmin: boolean = false;
   
   constructor(
     @Inject(MAT_DIALOG_DATA) public curso: any,
     public servicioAlumno: ServicioAlumnoService,
     public servicioCurso: ServiciosCursoService,
+    private servicioUsuario: UsuarioService,
     public dialogRef: MatDialogRef<InscripcionFormComponent>,
   ) { }
 
@@ -31,6 +34,13 @@ export class InscripcionFormComponent implements OnInit {
       this.alumnos = alumnos.filter((alumno:  Alumno) => alumno.cursos?.includes(this.curso.id));
       this.alumnosSelect = alumnos.filter( (alumno : Alumno) => !alumno.cursos?.includes(this.curso.id));
     });
+    if(this.servicioUsuario.esAdmin()){
+      this.esAdmin = true;
+      this.displayedColumns.push('eliminar');
+    }else{
+      //filtrar select por el alumno logueado
+      this.esAdmin = false;
+    }
   }
 
   guardar(){
