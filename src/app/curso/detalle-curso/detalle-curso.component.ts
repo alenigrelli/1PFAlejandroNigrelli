@@ -4,6 +4,7 @@ import { MatTable } from '@angular/material/table';
 import { forkJoin, Observable } from 'rxjs';
 import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.service';
+import { UsuarioService } from 'src/app/core/servicios/usuario.service';
 
 @Component({
   selector: 'app-detalle-curso',
@@ -12,8 +13,9 @@ import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.se
 })
 export class DetalleCursoComponent implements OnInit {
   alumnos!: any[];
-  displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento', 'eliminar'];
+  displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento'];
   alumnosEliminados: any[] = [];
+  esAdmin: boolean = false;
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(
@@ -21,6 +23,7 @@ export class DetalleCursoComponent implements OnInit {
     public servicioAlumnos: ServicioAlumnoService,
     public servicioCurso: ServiciosCursoService,
     public dialogRef: MatDialogRef<DetalleCursoComponent>,
+    private servicioUsuario: UsuarioService
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +31,10 @@ export class DetalleCursoComponent implements OnInit {
       this.alumnos = alumnos;
       this.table.renderRows();
     });
+    if(this.servicioUsuario.esAdmin()){
+      this.esAdmin = true;
+      this.displayedColumns.push('eliminar')
+    }
   }
 
   eliminarAlumnoCurso(alumnoIn:any){

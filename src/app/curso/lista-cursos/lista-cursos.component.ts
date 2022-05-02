@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
 import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.service';
+import { UsuarioService } from 'src/app/core/servicios/usuario.service';
 import { AbmCursosComponent } from '../abm-cursos/abm-cursos.component';
 import { DetalleCursoComponent } from '../detalle-curso/detalle-curso.component';
 
@@ -14,17 +15,26 @@ import { DetalleCursoComponent } from '../detalle-curso/detalle-curso.component'
 export class ListaCursosComponent implements OnInit, OnDestroy {
   @ViewChild(MatTable) table!: MatTable<any>;
   subscripcion!: Subscription;
+  esAdmin: boolean = false;
   cursos$!: Observable<any>;
-  displayedColumns: string[] = ['nombre', 'inicio', 'fin','verMas', 'editar', 'eliminar'];
+  displayedColumns: string[] = ['nombre', 'inicio', 'fin','verMas'];
 
   
   constructor(
     public dialog: MatDialog,
     private cursosServicio: ServiciosCursoService,
+    private usuarioServicio: UsuarioService
   ) { }
   
   ngOnInit(): void {
     this.cursos$ = this.cursosServicio.obtenerCurso();
+    if(this.usuarioServicio.esAdmin()){
+      this.displayedColumns.push('editar');
+      this.displayedColumns.push('eliminar');
+      this.esAdmin = true;
+    }else{
+      this.esAdmin = false;
+    }
   }
   
   agregarCurso(){
