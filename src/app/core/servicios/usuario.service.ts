@@ -8,7 +8,13 @@ export class UsuarioService {
   constructor() { }
 
   esAdmin(){
-    return false;
+    let usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado') || '');
+    if(usuarioLogueado && usuarioLogueado.permisos.includes('admin')){
+      return true;
+    }else{
+      return false;
+    }
+    
   }
 
   esAlumno(){
