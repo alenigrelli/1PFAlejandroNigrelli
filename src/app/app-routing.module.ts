@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'inscripcion', loadChildren: () => import('./inscripcion/inscripcion.module').then(m => m.InscripcionModule)
   },
 
+  {
+    path: 'usuarios', loadChildren: () => import('./usuario/usuario.module').then(m => m.UsuarioModule)
+  },
+
   {path: '', component: ListaAlumnosComponent },
 
   {path: 'login', canActivate: [NoAuthGuard], component: LoginComponent},

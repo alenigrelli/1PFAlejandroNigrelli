@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../servicios/login.service';
+import { UsuarioService } from '../servicios/usuario.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,14 +10,14 @@ import { LoginService } from '../servicios/login.service';
 export class toolbarComponent implements OnInit {
 
   constructor(
+    private servicioUsuario: UsuarioService
   ) { }
 
   ngOnInit(): void {
   }
 
   esAdmin(){
-    //llamo al servicio de usuario para ver sus permisos y retorno
-    return false;
+    return this.servicioUsuario.esAdmin();
   }
 
 }

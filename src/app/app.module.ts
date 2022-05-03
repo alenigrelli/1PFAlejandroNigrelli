@@ -15,6 +15,7 @@ import { CursoModule } from './curso/curso.module';
 import { InscripcionModule } from './inscripcion/inscripcion.module';
 import { CoreModule } from './core/core.module';
 import { LoginComponent } from './components/login/login.component';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { LoginComponent } from './components/login/login.component';
     InscripcionModule,
     CursoModule,
     AlumnoModule,
+    UsuarioModule,
     SharedModule,
     CoreModule,
     BrowserModule,
