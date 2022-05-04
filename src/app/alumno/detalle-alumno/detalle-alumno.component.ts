@@ -28,7 +28,7 @@ export class DetalleAlumnoComponent implements OnInit {
 
   ngOnInit(): void {
     this.servicioCursos.obtenerCurso().subscribe(cursos =>{
-      this.cursos = cursos.filter((curso : any) => {return curso.alumnos?.includes(this.alumno.id)});
+      this.cursos = cursos.filter((curso : any) => {return curso.alumnos?.includes(this.alumno.idAlumno)});
       this.table.renderRows();
     });
     if(this.servicioUsuario.esAdmin()){
@@ -51,7 +51,7 @@ export class DetalleAlumnoComponent implements OnInit {
     this.cursosEliminados.forEach((curso: any) =>{
       const alumnos = curso.alumnos.filter((alumno: any) => alumno.id != this.alumno.id) || [];
       observables.push(this.servicioCursos.guardarAlumnos(curso.id, alumnos));
-      observables.push(this.servicioAlumnos.eliminarCurso(this.alumno.id, curso.id));
+      observables.push(this.servicioAlumnos.eliminarCurso(this.alumno.idAlumno, curso.id));
     });
     forkJoin(observables).subscribe(element =>{
       this.dialogRef.close();
