@@ -128,7 +128,7 @@ export class ServicioAlumnoService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.alumnoSubscripcion.unsubscribe();
+    this.alumnoSubscripcion?.unsubscribe();
   }
 
 }
