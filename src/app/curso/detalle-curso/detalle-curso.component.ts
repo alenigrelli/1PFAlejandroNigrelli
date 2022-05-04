@@ -47,7 +47,6 @@ export class DetalleCursoComponent implements OnInit {
     const observables: Observable<any>[] = [];
     observables.push(this.servicioCurso.guardarAlumnos(this.curso.id, this.alumnos));
     this.alumnosEliminados.forEach(alumno =>{
-      console.log(alumno);
       observables.push(this.servicioAlumnos.eliminarCurso(alumno.id, this.curso.id));
     })
     forkJoin(observables).subscribe(element =>{
