@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/core/servicios/usuario.service';
   styleUrls: ['./lista-alumnos.component.css']
 })
 export class ListaAlumnosComponent implements OnInit, OnDestroy {
-  alumnos!: Alumno[];
+  alumnos!: any[];
   dialogoEditar: boolean = false;
   displayedColumns: string[] = ['nombre','dni', 'edad', 'nacimiento', 'ingreso', 'verMas'];
   dataSource: any;
@@ -25,7 +25,8 @@ export class ListaAlumnosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscripcion = this.servicioAlumnos.obtenerAlumnos().subscribe( alumnos =>{
-      this.alumnos = alumnos;
+      this.alumnos = alumnos.filter((alumno: any) => (alumno?.usuario?.nombre?.length || 0) > 0)
+      .map( (alumno: Alumno) => {return {...alumno.usuario, fechaIngreso: alumno.fechaIngreso}});
     })
     if(this.esAdmin()){
       this.displayedColumns.push('editar');

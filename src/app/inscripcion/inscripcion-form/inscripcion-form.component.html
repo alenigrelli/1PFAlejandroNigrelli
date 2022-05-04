@@ -11,7 +11,7 @@
         <mat-label>Alumno</mat-label>
         <mat-select  [(value)]="alumnoSeleccionado" name="alumnoSeleccionado">
           <mat-option *ngFor="let alumno of alumnosSelect" [value]="alumno.id">
-            {{alumno.nombre}}
+            {{alumno.obtenerNombre()}}
           </mat-option>
         </mat-select>
       </mat-form-field>

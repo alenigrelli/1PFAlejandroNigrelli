@@ -1,20 +1,20 @@
-import { Curso } from "./curso";
-import { usuario } from "./usuario";
+import { Usuario } from "./usuario";
 
-export class Alumno extends usuario {
-    constructor(
-    public promedio: number,
-    public cantMatInscr: number,
-    public id: number,
-    public nombre?: string,
-    public apellido?: string,
-    public fechaIngreso?: Date,
-    public edad?: number,
-    public fechaNacimiento?: Date,
-    public cursos?: number[],
-
-    ){
-        super();
+export class Alumno  {
+    public promedio: number;
+    public cantMatInscr!: number;
+    public id!: number;
+    public usuario!: Usuario;
+    public fechaIngreso?: Date;
+    public cursos?: number[];
+    constructor(){
         this.promedio = 0;
+    }
+    public obtenerNombre(){
+        return this.usuario.nombre;
+    }
+
+    public obtenerApellido(){
+        return this.usuario.apellido;
     }
 }

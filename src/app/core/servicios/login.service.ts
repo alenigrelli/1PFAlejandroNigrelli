@@ -37,8 +37,8 @@ export class LoginService {
     this.servicioAlumnos.loginUsuario(email, contraseña)
     .subscribe((alumno: any) =>{
       if(alumno.length === 1){
-        localStorage.setItem('usuarioLogueado', JSON.stringify(alumno[0]));
-        this.subjectUsuario.next(alumno)
+        localStorage.setItem('usuarioLogueado', JSON.stringify(alumno[0].usuario));
+        this.subjectUsuario.next(alumno[0].usuario)
       }
     });
     return this.subjectUsuario;

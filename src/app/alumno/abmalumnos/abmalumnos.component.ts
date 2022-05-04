@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 @Component({
   selector: 'abmalumnos',
@@ -18,6 +19,7 @@ export class abmalumnosComponent implements OnInit {
     fechaNacimiento: new FormControl('', Validators.required),
     cantMatInscr: new FormControl('', Validators.required)
   });
+  usuarioId: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private servicioAlumnos: ServicioAlumnoService,
@@ -34,11 +36,14 @@ export class abmalumnosComponent implements OnInit {
 
   guardar(){
     if(this.formAlumno.status === 'VALID'){
+
       this.formAlumno.value.id = this.data?.id || '';
-      this.servicioAlumnos.guardarAlumno(this.formAlumno.value)
+      this.usuarioId = this.data?.usuario?.id || '';
+      forkJoin(this.servicioAlumnos.guardarAlumno(this.formAlumno.value, this.data))
       .subscribe(element =>{
         this.dialogRef.close();
-        this.servicioAlumnos.actualizaSubject(element);
+        console.log(element);
+        this.servicioAlumnos.actualizaSubject(element[0]);
       });
     }
   }

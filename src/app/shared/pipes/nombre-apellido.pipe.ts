@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Usuario } from 'src/app/clases/usuario';
 import { Alumno } from '../../clases/alumno';
 
 @Pipe({
@@ -6,7 +7,7 @@ import { Alumno } from '../../clases/alumno';
 })
 export class NombreApellidoPipe implements PipeTransform {
 
-  transform(alumno: Alumno): unknown {
+  transform(alumno: Usuario): unknown {
     let nombreCompleto = alumno.nombre + '-' + alumno.apellido;
     return nombreCompleto;
   }
