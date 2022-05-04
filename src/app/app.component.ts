@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     if(usuarioLogueado){
       this.nombreUsuario = JSON.parse(usuarioLogueado).nombre;
     }
-    if(this.estaLogueado){
+    if(!this.estaLogueado){
       this.router.navigate(['/login'])
     }
   }
