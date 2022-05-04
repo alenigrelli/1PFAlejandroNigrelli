@@ -70,8 +70,11 @@ export class InscripcionFormComponent implements OnInit {
   }
 
   eliminarAlumnoCurso(alumnoIn: any){
-    this.alumnosSelect.push(alumnoIn);
-    this.alumnos = this.alumnos.filter(alumno => alumno.id != alumnoIn.id);
-    this.tabla.renderRows();
+    this.servicioAlumno.eliminarCurso(alumnoIn.id, this.curso.id).subscribe(element =>{
+      this.alumnosSelect.push(alumnoIn);
+      this.alumnos = this.alumnos.filter(alumno => alumno.id != alumnoIn.id);
+      this.tabla.renderRows();
+    })
+    
   }
 }
