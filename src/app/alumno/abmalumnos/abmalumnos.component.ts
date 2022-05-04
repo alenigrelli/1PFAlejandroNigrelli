@@ -37,7 +37,8 @@ export class abmalumnosComponent implements OnInit {
         apellido: this.data.apellido,
         fechaNacimiento: this.data.fechaNacimiento,
         fechaIngreso: this.data.fechaIngreso,
-        cantMatInscr: this.data.cantMatInscr
+        cantMatInscr: this.data.cantMatInscr,
+        email: this.data.email
       });
     }
   }
