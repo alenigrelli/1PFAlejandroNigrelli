@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnChanges, OnInit, SimpleChange } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from './core/servicios/login.service';
 
 @Component({
@@ -10,7 +11,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   title = '1PFAlejandroNigrelli';
   usuarioLogueado!: boolean;
   constructor(
-    public servicioLogin: LoginService
+    public servicioLogin: LoginService,
+    public router: Router
   ){
 
   }
@@ -18,10 +20,16 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngOnInit(){
     this.servicioLogin.usuarioLogueado().subscribe(logueado =>{
       this.usuarioLogueado = logueado;
+      this.router.navigate(['/alumnos/listaAlumnos'])
     });
   }
 
   ngAfterViewInit(): void {
+    this.usuarioLogueado = this.servicioLogin.Logueado();
+  }
+
+  cerrarSesion(){
+    this.servicioLogin.logOut();
     this.usuarioLogueado = this.servicioLogin.Logueado();
   }
 

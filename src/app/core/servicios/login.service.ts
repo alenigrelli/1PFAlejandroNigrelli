@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { of, Subject } from 'rxjs';
 import { ServicioAlumnoService } from './servicio-alumno.service';
+import { UsuarioService } from './usuario.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ export class LoginService {
   subjectUsuarioLogueado: Subject<any> = new Subject();
   logueado: boolean = false;
   constructor(private router: Router,
-    private servicioAlumnos: ServicioAlumnoService
+    private servicioAlumnos: ServicioAlumnoService,
+    private servicioUsuarios: UsuarioService
+
     ) { }
 
   usuarioLogueado(){
@@ -34,14 +37,21 @@ export class LoginService {
   }
 
   loguearse(email: string, contraseña: any){
-    this.servicioAlumnos.loginUsuario(email, contraseña)
-    .subscribe((alumno: any) =>{
-      if(alumno.length === 1){
-        localStorage.setItem('usuarioLogueado', JSON.stringify(alumno[0].usuario));
-        this.subjectUsuario.next(alumno[0].usuario)
+    this.servicioUsuarios.loginUsuario(email, contraseña)
+    .subscribe((usuario: any) =>{
+      if(usuario){
+        localStorage.setItem('usuarioLogueado', JSON.stringify(usuario[0]));
+        this.subjectUsuario.next(usuario[0]);
       }
     });
     return this.subjectUsuario;
+  }
+
+  logOut(){
+    localStorage.setItem('usuarioLogueado', '');
+    this.router.navigate(['/login'])
+    this.subjectUsuario.next(0)
+
   }
 
 
