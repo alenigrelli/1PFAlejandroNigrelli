@@ -29,22 +29,33 @@ export class abmalumnosComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.data) {
-      this.formAlumno.setValue(this.data);
-      this.formAlumno.value.id = this.data.id || '';
+      this.formAlumno.setValue({
+        id: this.data.idAlumno || '',
+        dni: this.data.dni,
+        nombre: this.data.nombre,
+        edad: this.data.edad,
+        apellido: this.data.apellido,
+        fechaNacimiento: this.data.fechaNacimiento,
+        fechaIngreso: this.data.fechaIngreso,
+        cantMatInscr: this.data.cantMatInscr
+      });
     }
   }
 
   guardar(){
     if(this.formAlumno.status === 'VALID'){
 
-      this.formAlumno.value.id = this.data?.id || '';
-      this.usuarioId = this.data?.usuario?.id || '';
-      forkJoin(this.servicioAlumnos.guardarAlumno(this.formAlumno.value, this.data))
-      .subscribe(element =>{
-        this.dialogRef.close();
-        console.log(element);
-        this.servicioAlumnos.actualizaSubject(element[0]);
-      });
+      this.formAlumno.value.id = this.data?.idAlumno || '';
+      this.usuarioId = this.data?.usuario?.idAlumno || '';
+     /// const observablesArray = this.servicioAlumnos.guardarAlumno(this.formAlumno.value, this.data);
+      this.servicioAlumnos.guardarUsuario(this.formAlumno.value, this.data).subscribe(usuario =>{
+        this.servicioAlumnos.guardarAlumno(this.formAlumno.value, this.data, usuario).subscribe(
+          alumno =>{
+            this.dialogRef.close();
+            this.servicioAlumnos.actualizaSubject(alumno);
+          }
+        )
+      })
     }
   }
 

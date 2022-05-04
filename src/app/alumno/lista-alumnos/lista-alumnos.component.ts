@@ -26,7 +26,7 @@ export class ListaAlumnosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscripcion = this.servicioAlumnos.obtenerAlumnos().subscribe( alumnos =>{
       this.alumnos = alumnos.filter((alumno: any) => (alumno?.usuario?.nombre?.length || 0) > 0)
-      .map( (alumno: Alumno) => {return {...alumno.usuario, fechaIngreso: alumno.fechaIngreso}});
+      .map( (alumno: Alumno) => {return {...alumno.usuario, fechaIngreso: alumno.fechaIngreso, idAlumno: alumno.id, cantMatInscr: alumno.cantMatInscr}});
     })
     if(this.esAdmin()){
       this.displayedColumns.push('editar');
@@ -42,6 +42,7 @@ export class ListaAlumnosComponent implements OnInit, OnDestroy {
   }
 
   editarAlumno(value: any){
+
     this.dialog.open(abmalumnosComponent,{
       data: value
     });

@@ -17,24 +17,39 @@ export class ServicioAlumnoService implements OnDestroy {
     private http: HttpClient
   ){}
 
-  guardarAlumno(value: any, data: any){
+  guardarAlumno(value: any, data: any, usuario?: any){
     this.alumnos = this.alumnos.filter( alumno => alumno.id != value.id) || [];
+    if(value.id){
+      const alumnoUpdate = new Alumno();
+      alumnoUpdate.cantMatInscr = value.cantMatInscr;
+      alumnoUpdate.cursos = value.cursos || [];
+      alumnoUpdate.usuario = usuario
+      return this.http.put('https://625608b68646add390e01368.mockapi.io/alumnos/v1/alumnos/'+value.id,alumnoUpdate);
+    }else{
+      const alumnoNuevo = new Alumno();
+      alumnoNuevo.cantMatInscr = value.cantMatInscr;
+      alumnoNuevo.fechaIngreso = value.fechaIngreso;
+      alumnoNuevo.promedio = value.promedio;
+      alumnoNuevo.usuario = usuario;
+      alumnoNuevo.cursos = [];
+      return this.http.post('https://625608b68646add390e01368.mockapi.io/alumnos/v1/alumnos/',alumnoNuevo);
+    }
+
+  }
+
+  guardarUsuario(value:any, data:any){
     if(value.id){
       const usuarioUpdate = new Usuario();
       usuarioUpdate.nombre = value.nombre;
       usuarioUpdate.edad = value.edad;
       usuarioUpdate.permisos = [];
       usuarioUpdate.email = value.email;
-      usuarioUpdate.id = data.usuario.id;
+      usuarioUpdate.id = data.id;
       usuarioUpdate.apellido = value.apellido;
-      usuarioUpdate.contrasena = data.usuario.contrasena;
+      usuarioUpdate.contrasena = data.contrasena;
       usuarioUpdate.fechaNacimiento = value.fechaNacimiento;
       usuarioUpdate.dni = value.dni;
-      const alumnoUpdate = new Alumno();
-      alumnoUpdate.cantMatInscr = value.cantMatInscr;
-      alumnoUpdate.cursos = value.cursos;
-      return [this.http.put('https://625608b68646add390e01368.mockapi.io/alumnos/v1/alumnos/'+value.id,value),
-              this.http.put('https://625608b68646add390e01368.mockapi.io/alumnos/v1/usuarios/'+data.usuario.id, usuarioUpdate)];
+      return this.http.put('https://625608b68646add390e01368.mockapi.io/alumnos/v1/usuarios/'+data.id, usuarioUpdate)
     }else{
       const usuarioNuevo = new Usuario();
       usuarioNuevo.nombre = value.nombre;
@@ -45,15 +60,7 @@ export class ServicioAlumnoService implements OnDestroy {
       usuarioNuevo.contrasena = '123';
       usuarioNuevo.fechaNacimiento = value.fechaNacimiento;
       usuarioNuevo.dni = value.dni;
-
-      const alumnoNuevo = new Alumno();
-      alumnoNuevo.cantMatInscr = value.cantMatInscr;
-      alumnoNuevo.fechaIngreso = value.fechaIngreso;
-      alumnoNuevo.promedio = value.promedio;
-      alumnoNuevo.usuario = usuarioNuevo;
-      alumnoNuevo.cursos = [];
-      return [this.http.post('https://625608b68646add390e01368.mockapi.io/alumnos/v1/alumnos/',alumnoNuevo),
-      this.http.post('https://625608b68646add390e01368.mockapi.io/alumnos/v1/usuarios/',usuarioNuevo)];
+      return this.http.post('https://625608b68646add390e01368.mockapi.io/alumnos/v1/usuarios/',usuarioNuevo)
     }
 
   }
