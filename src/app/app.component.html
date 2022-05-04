@@ -1,16 +1,20 @@
 <div *ngIf="estaLogueado" fxFlexFill>
+    <div>
     <mat-toolbar color="primary" style="background-color: #005b8f;">
         <div>
             <button mat-icon-button (click)="sidenav.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
         </div>
-        <a mat-button appTamanoletra>UNC</a>
-        <button mat-button (click)="cerrarSesion()">LOGOUT </button>
-        <h6>¡Hola {{nombreUsuario}}!</h6>
+        <div style="margin-left: auto;">
+            <h6>¡Hola {{nombreUsuario}}!</h6>
+        </div>
+        <div style="margin-left: auto;">
+            <button  mat-button (click)="cerrarSesion()">Logout </button>
+        </div>
 
     </mat-toolbar>
-
+    </div>
     <mat-sidenav-container  fxFlexFill>
         <mat-sidenav  #sidenav fxLayout="column" mode="side" style="background-color: blues;" opened="true">
             <app-toolbar></app-toolbar>
