@@ -31,14 +31,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public onSubmit(): void {
     this.servicioLogin.loguearse(this.formLogin.value.username, this.formLogin.value.password)
-    .subscribe(alumno =>{
-      if(alumno){
+    .subscribe(usuario =>{
+      if(usuario){
         this.servicioLogin.usuarioLogueado();
-      }else{
-        alert("el usuario o contraseña no existe!")
-      }
+      };
     });
-
-   
   }
 }

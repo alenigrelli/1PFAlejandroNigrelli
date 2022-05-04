@@ -9,7 +9,9 @@ import { LoginService } from './core/servicios/login.service';
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = '1PFAlejandroNigrelli';
-  usuarioLogueado!: boolean;
+  estaLogueado!: boolean;
+  nombreUsuario!: any;
+
   constructor(
     public servicioLogin: LoginService,
     public router: Router
@@ -19,18 +21,26 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(){
     this.servicioLogin.usuarioLogueado().subscribe(logueado =>{
-      this.usuarioLogueado = logueado;
+      this.estaLogueado = logueado;
+      let usuarioLogueado = localStorage.getItem('usuarioLogueado') || '';
+      if(usuarioLogueado){
+        this.nombreUsuario = JSON.parse(usuarioLogueado).nombre;
+      }
       this.router.navigate(['/alumnos/listaAlumnos'])
     });
   }
 
   ngAfterViewInit(): void {
-    this.usuarioLogueado = this.servicioLogin.Logueado();
+    this.estaLogueado = this.servicioLogin.Logueado();
+    let usuarioLogueado = localStorage.getItem('usuarioLogueado') || '';
+    if(usuarioLogueado){
+      this.nombreUsuario = JSON.parse(usuarioLogueado).nombre;
+    }
   }
 
   cerrarSesion(){
     this.servicioLogin.logOut();
-    this.usuarioLogueado = this.servicioLogin.Logueado();
+    this.estaLogueado = this.servicioLogin.Logueado();
   }
 
 }

@@ -27,7 +27,7 @@ export class ServiciosCursoService {
   }
 
   guardarCurso(value: any){
-    this.cursos = this.cursos.filter( curso => curso.id !== value.id) || [];
+    this.cursos = this.cursos?.filter( curso => curso.id !== value.id) || [];
     this.cursos.push(value);
     if(value.id)
       return this.http.put('https://62726699c455a64564c084c3.mockapi.io/cursos/'+value.id,value);

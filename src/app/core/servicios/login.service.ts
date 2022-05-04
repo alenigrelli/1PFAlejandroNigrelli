@@ -21,7 +21,7 @@ export class LoginService {
     let logueado = false;
     let usuarioLogueado = localStorage.getItem('usuarioLogueado') || '';
     
-    if(usuarioLogueado){
+    if(usuarioLogueado.length > 0){
       logueado = true;
     }
     this.subjectUsuarioLogueado.next(logueado);
@@ -48,7 +48,7 @@ export class LoginService {
   }
 
   logOut(){
-    localStorage.setItem('usuarioLogueado', '');
+    localStorage.removeItem('usuarioLogueado');
     this.router.navigate(['/login'])
     this.subjectUsuario.next(0)
 

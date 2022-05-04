@@ -1,4 +1,4 @@
-<div *ngIf="usuarioLogueado" fxFlexFill>
+<div *ngIf="estaLogueado" fxFlexFill>
     <mat-toolbar color="primary" style="background-color: #005b8f;">
         <div>
             <button mat-icon-button (click)="sidenav.toggle()">
@@ -7,6 +7,7 @@
         </div>
         <a mat-button appTamanoletra>UNC</a>
         <button mat-button (click)="cerrarSesion()">LOGOUT </button>
+        <h6>¡Hola {{nombreUsuario}}!</h6>
 
     </mat-toolbar>
 
@@ -19,6 +20,6 @@
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>
-<div *ngIf="!usuarioLogueado">
+<div *ngIf="!estaLogueado">
     <app-login></app-login>
 </div>

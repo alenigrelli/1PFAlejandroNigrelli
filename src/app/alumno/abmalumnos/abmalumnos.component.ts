@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 @Component({
   selector: 'abmalumnos',
@@ -17,7 +16,8 @@ export class abmalumnosComponent implements OnInit {
     fechaIngreso: new FormControl('', Validators.required),
     edad: new FormControl('', Validators.required),
     fechaNacimiento: new FormControl('', Validators.required),
-    cantMatInscr: new FormControl('', Validators.required)
+    cantMatInscr: new FormControl('', Validators.required),
+    email: new FormControl('',Validators.required)
   });
   usuarioId: any;
   constructor(
@@ -47,7 +47,6 @@ export class abmalumnosComponent implements OnInit {
 
       this.formAlumno.value.id = this.data?.idAlumno || '';
       this.usuarioId = this.data?.usuario?.idAlumno || '';
-     /// const observablesArray = this.servicioAlumnos.guardarAlumno(this.formAlumno.value, this.data);
       this.servicioAlumnos.guardarUsuario(this.formAlumno.value, this.data).subscribe(usuario =>{
         this.servicioAlumnos.guardarAlumno(this.formAlumno.value, this.data, usuario).subscribe(
           alumno =>{
