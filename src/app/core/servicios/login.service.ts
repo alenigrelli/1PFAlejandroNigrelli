@@ -48,10 +48,9 @@ export class LoginService {
   }
 
   logOut(){
-    localStorage.removeItem('usuarioLogueado');
+    localStorage.setItem('usuarioLogueado','');
     this.router.navigate(['/login'])
-    this.subjectUsuario.next(0)
-
+    this.subjectUsuario.next('')
   }
 
 
