@@ -27,6 +27,7 @@ describe('UsuarioService', () => {
         apellido: 'Nigrelli',
         email: 'alejandro.nigrelli@gmail.com',
         contrasena: '123',
+        permisos: ['admin'],
         id: 2
       }];
       LoginService.loguearse(mockUsuario[0].email, mockUsuario[0].contrasena).subscribe(usuario =>{

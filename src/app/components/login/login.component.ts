@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, Subject, take, takeUntil } from 'rxjs';
 import { LoginService } from 'src/app/core/servicios/login.service';
@@ -11,8 +11,8 @@ import { LoginService } from 'src/app/core/servicios/login.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   formLogin: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl('')
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
   });
 
   public loginValid = true;
