@@ -1,0 +1,68 @@
+<h3>Detalle Alumno</h3>
+
+<table  cellspacing="5"><tr>
+    <td><mat-form-field  appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput disabled="true" [value]="alumno.nombre" placeholder="Nombre">
+    </mat-form-field></td>
+    <td><mat-form-field  appearance="fill">
+      <mat-label>Apellido</mat-label>
+      <input matInput disabled="true" [value]="alumno.apellido" placeholder="Apellido">
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>DNI</mat-label>
+      <input matInput placeholder="DNI" disabled="true" [value]="alumno.dni" >
+    </mat-form-field></td>
+  </tr></table>
+
+  <table cellspacing="5"><tr>
+    <td>
+        <mat-form-field  class="example-full-width" appearance="fill">
+            <mat-label>Fecha Ingreso</mat-label>
+            <input matInput disabled="true" placeholder="Fecha Ingreso" [value]="alumno.fechaIngreso">
+        </mat-form-field>
+    </td>
+    <td><mat-form-field  appearance="fill">
+      <mat-label>Edad</mat-label>
+      <input matInput placeholder="Edad" disabled="true" [value]="alumno.edad">
+    </mat-form-field></td>
+    <td><mat-form-field  appearance="fill">
+      <mat-label>Fecha Nacimiento</mat-label>
+      <input matInput placeholder="Fecha Nacimiento" disabled="true" [value]="alumno.fechaNacimiento">
+    </mat-form-field></td>
+  </tr></table>
+  
+  <h4>Cursos Inscriptos</h4>
+  <table mat-table [dataSource]="cursos" style="width: 100%;" class="mat-elevation-z8">
+    <ng-container matColumnDef="nombre">
+    <th  mat-header-cell appTamanoletra *matHeaderCellDef> Nombre</th>
+    <td mat-cell  *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="inicio">
+          <th  mat-header-cell appTamanoletra *matHeaderCellDef> Fecha Inicio</th>
+          <td mat-cell  *matCellDef="let element"> {{element.fechaInicio | date: 'dd/mm/yyyy' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fin">
+          <th  mat-header-cell appTamanoletra *matHeaderCellDef> Fecha Fin</th>
+          <td mat-cell  *matCellDef="let element"> {{element.fechaFin | date: 'dd/mm/yyyy'}} </td>
+    </ng-container>
+
+    <ng-container *ngIf="esAdmin" matColumnDef="eliminar">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"> 
+        <button mat-mini-fab color="primary" (click)="eliminarInscripcion(element)">
+            <mat-icon>delete</mat-icon>
+        </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div style="margin-top: 10px;">
+    <button mat-button appStandardbutton (click)="guardar()">Guardar</button>
+    <button mat-button mat-dialog-close appStandardbutton> Cancelar </button>
+</div>

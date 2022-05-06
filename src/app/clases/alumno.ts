@@ -1,19 +1,20 @@
-export class Alumno {
-    constructor(
-    public id?: number,
-    public nombre?: string,
-    public apellido?: string,
-    public fechaIngreso?: Date,
-    public edad?: number,
-    public fechaNacimiento?: Date,
-    public cantMatInscr?: number,
-    ){
-        id = Math.random();
-        nombre = '';
-        apellido = '';
-        fechaIngreso = new Date(2017,0,12);
-        edad = 0;
-        fechaNacimiento = new Date(2017,0,12);
-        cantMatInscr = 0;
+import { Usuario } from "./usuario";
+
+export class Alumno  {
+    public promedio: number;
+    public cantMatInscr!: number;
+    public id!: number;
+    public usuario!: Usuario;
+    public fechaIngreso?: Date;
+    public cursos?: number[];
+    constructor(){
+        this.promedio = 0;
+    }
+    public obtenerNombre(){
+        return this.usuario.nombre;
+    }
+
+    public obtenerApellido(){
+        return this.usuario.apellido;
     }
 }

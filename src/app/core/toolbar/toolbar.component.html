@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" style="background-color: #005b8f;">
+    <mat-toolbar-row >
+      <a href="alumnos/listaAlumnos" mat-button style="background-color: #005b8f;">ABM Alumnos</a>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <a href="cursos/listaCursos" mat-button style="background-color: #005b8f;">ABM Cursos</a>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <a href="alumnos/consultaAlumnos" mat-button style="background-color: #005b8f;">Consulta Alumnos</a>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <a href="inscripcion/inscripcionCurso" mat-button style="background-color: #005b8f;">Inscripcion Cursos</a>
+    </mat-toolbar-row>
+    <mat-toolbar-row *ngIf="esAdmin()">
+      <a href="usuarios/abmusuarios" mat-button style="background-color: #005b8f;">ABM Usuarios</a>
+    </mat-toolbar-row>
+
+</mat-toolbar>

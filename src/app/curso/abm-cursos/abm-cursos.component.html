@@ -1,0 +1,21 @@
+<h1 *ngIf="data" appTamanoletra> Editar curso </h1>
+<h1 *ngIf="!data" appTamanoletra> Crear curso</h1>
+<form [formGroup]="formCurso">
+    <table  cellspacing="5"><tr>
+      <td><mat-form-field  appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre">
+      </mat-form-field></td>
+      <td><mat-form-field  appearance="fill">
+        <mat-label>Fecha Inicio</mat-label>
+        <input matInput type="date" formControlName="fechaInicio">
+      </mat-form-field></td>
+      <td><mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Fecha Fin</mat-label>
+        <input matInput type="date" formControlName="fechaFin">
+      </mat-form-field></td>
+    </tr></table>
+    
+    <button mat-button appStandardbutton (click)="guardar()">Guardar</button>
+    <button mat-button mat-dialog-close appStandardbutton> Cancelar </button>
+  </form>
