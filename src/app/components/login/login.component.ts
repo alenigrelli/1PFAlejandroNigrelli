@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, Subject, take, takeUntil } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { filter, Observable, Subject, take, takeUntil } from 'rxjs';
 import { LoginService } from 'src/app/core/servicios/login.service';
+import { crearSesion } from 'src/app/state/actions/login.actions';
+import { selectorSesionActiva } from '../../state/selectors/login.selectors';
 
 @Component({
   selector: 'app-login',
@@ -14,16 +17,18 @@ export class LoginComponent implements OnInit, OnDestroy {
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
-
+  sesion$!: Observable<any>;
   public loginValid = true;
 
   constructor(
     public servicioLogin: LoginService,
+    private store: Store<any>,
     private router: Router
   ) {
   }
 
   public ngOnInit(): void {
+    this.sesion$ = this.store.select(selectorSesionActiva);
   }
 
   public ngOnDestroy(): void {
@@ -33,7 +38,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.servicioLogin.loguearse(this.formLogin.value.username, this.formLogin.value.password)
     .subscribe(usuario =>{
       if(usuario){
-        this.servicioLogin.usuarioLogueado();
+        this.store.dispatch(crearSesion({usuario: usuario}));
+        //this.servicioLogin.usuarioLogueado();
       };
     });
   }

@@ -16,6 +16,10 @@ import { InscripcionModule } from './inscripcion/inscripcion.module';
 import { CoreModule } from './core/core.module';
 import { LoginComponent } from './components/login/login.component';
 import { UsuarioModule } from './usuario/usuario.module';
+import { ROOT_REDUCERS } from './state/app.state';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { UsuarioModule } from './usuario/usuario.module';
     FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({ name: "Prueba login"}),
   ],
   providers: [SharedModule],
   bootstrap: [AppComponent]

@@ -40,7 +40,7 @@ export class LoginService {
     this.servicioUsuarios.loginUsuario(email, contraseña)
     .subscribe((usuario: any) =>{
       if(usuario){
-        localStorage.setItem('usuarioLogueado', JSON.stringify(usuario[0]));
+        //localStorage.setItem('usuarioLogueado', JSON.stringify(usuario[0]));
         this.subjectUsuario.next(usuario[0]);
       }
     });
