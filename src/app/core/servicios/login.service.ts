@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { of, Subject } from 'rxjs';
 import { ServicioAlumnoService } from './servicio-alumno.service';
 import { UsuarioService } from './usuario.service';
+import { Store } from '@ngrx/store';
+import { selectorUsuarioActivo } from 'src/app/state/selectors/login.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -11,25 +13,42 @@ export class LoginService {
   subjectUsuario: Subject<any> = new Subject();
   subjectUsuarioLogueado: Subject<any> = new Subject();
   logueado: boolean = false;
+  usuarioActivo: boolean = false;
   constructor(private router: Router,
     private servicioAlumnos: ServicioAlumnoService,
-    private servicioUsuarios: UsuarioService
-
+    private servicioUsuarios: UsuarioService,
+    private store: Store
     ) { }
 
   usuarioLogueado(){
     let logueado = false;
-    let usuarioLogueado = localStorage.getItem('usuarioLogueado') || '';
-    
-    if(usuarioLogueado.length > 0){
+    //let usuarioLogueado = localStorage.getItem('usuarioLogueado') || '';
+    //let usuarioLogueado =
+    let usuarioPersistente = localStorage.getItem('usuarioLogueado') || '';
+    if(!usuarioPersistente){
+      this.store.select(selectorUsuarioActivo).subscribe((usuario) => {
+        this.usuarioActivo = usuario.sesionActiva;
+        logueado = usuario.sesionActiva;
+      });
+    }else{
+      this.usuarioActivo = true;
       logueado = true;
     }
+    //console.log(this.usuarioActivo);
     this.subjectUsuarioLogueado.next(logueado);
     return this.subjectUsuarioLogueado;
   }
 
   Logueado(){
-    let usuarioLogueado = localStorage.getItem('usuarioLogueado') || '';
+    let usuarioLogueado;
+    let usuarioPersistente = localStorage.getItem('usuarioLogueado') || '';
+    if(!usuarioPersistente){
+      this.store.select(selectorUsuarioActivo).subscribe((usuario) => {
+        usuarioLogueado = usuario.sesionActiva;
+      });
+    }else{
+      usuarioLogueado = true;
+    }
     if(usuarioLogueado){
       return true;
     }
@@ -40,7 +59,6 @@ export class LoginService {
     this.servicioUsuarios.loginUsuario(email, contraseña)
     .subscribe((usuario: any) =>{
       if(usuario){
-        //localStorage.setItem('usuarioLogueado', JSON.stringify(usuario[0]));
         this.subjectUsuario.next(usuario[0]);
       }
     });

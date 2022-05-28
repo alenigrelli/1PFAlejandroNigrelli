@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { filter, Observable, Subject, take, takeUntil } from 'rxjs';
 import { LoginService } from 'src/app/core/servicios/login.service';
 import { crearSesion } from 'src/app/state/actions/login.actions';
-import { selectorSesionActiva } from '../../state/selectors/login.selectors';
+import { selectorUsuarioActivo } from '../../state/selectors/login.selectors';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.sesion$ = this.store.select(selectorSesionActiva);
+    this.sesion$ = this.store.select(selectorUsuarioActivo);
   }
 
   public ngOnDestroy(): void {
@@ -39,7 +39,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     .subscribe(usuario =>{
       if(usuario){
         this.store.dispatch(crearSesion({usuario: usuario}));
-        //this.servicioLogin.usuarioLogueado();
+        localStorage.setItem('usuarioLogueado', JSON.stringify(usuario));
+        this.servicioLogin.usuarioLogueado();
       };
     });
   }

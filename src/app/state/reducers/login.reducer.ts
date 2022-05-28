@@ -1,6 +1,14 @@
 import { createReducer, on } from "@ngrx/store";
 import { crearSesion } from "../actions/login.actions";
 
+
+export const authFeatureKey = 'auth';
+
+export interface AuthState {
+    usaurioActivo: any
+}
+
+  
 export const estadoInicial: any = {
     sesionActiva: false,
     usuario: {
@@ -16,7 +24,6 @@ export const estadoInicial: any = {
 export const loginReducer = createReducer(
     estadoInicial, 
     on(crearSesion, (estado, {usuario}) => {
-      console.log(usuario);
         return { ...estado, sesionActiva: true, usuario }
     }
 

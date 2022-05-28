@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { map, Observable, Subject, Subscription } from 'rxjs';
 import { Usuario } from 'src/app/clases/usuario';
+import { selectorUsuarioActivo } from 'src/app/state/selectors/login.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +15,19 @@ export class UsuarioService {
   usuarioSubscripcion!: Subscription;
   subjectUsuarioLogueado: Subject<any> = new Subject();
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private store: Store
   ) { }
 
   esAdmin(){
-    let usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado') || '');
-    if(usuarioLogueado && usuarioLogueado.permisos.includes('admin')){
+    let usuarioActivo = false;
+    let usuarioLogueado: any;
+    
+    this.store.select(selectorUsuarioActivo).subscribe((usuario) => {
+      usuarioActivo = usuario.sesionActiva;
+      usuarioLogueado = usuario;
+    });
+    if(usuarioActivo && usuarioLogueado.usuario.permisos.includes('admin')){
       return true;
     }else{
       return false;

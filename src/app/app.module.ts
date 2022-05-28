@@ -20,6 +20,7 @@ import { ROOT_REDUCERS } from './state/app.state';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { authFeatureKey, loginReducer } from './state/reducers/login.reducer';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreModule.forRoot({}),
+    StoreModule.forFeature(authFeatureKey, loginReducer),
     StoreDevtoolsModule.instrument({ name: "Prueba login"}),
   ],
   providers: [SharedModule],
