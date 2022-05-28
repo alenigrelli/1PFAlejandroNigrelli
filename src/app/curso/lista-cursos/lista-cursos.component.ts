@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { Ng2IzitoastService } from 'ng2-izitoast';
 import { Observable, Subscription } from 'rxjs';
 import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.service';
 import { UsuarioService } from 'src/app/core/servicios/usuario.service';
@@ -23,7 +24,8 @@ export class ListaCursosComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     private cursosServicio: ServiciosCursoService,
-    private usuarioServicio: UsuarioService
+    private usuarioServicio: UsuarioService,
+    public iziToast: Ng2IzitoastService
   ) { }
   
   ngOnInit(): void {
@@ -59,13 +61,22 @@ export class ListaCursosComponent implements OnInit, OnDestroy {
   }
 
   eliminarCurso(id: number){
-    this.cursos$ = this.cursosServicio.eliminarCurso(id);
+    this.cursos$ = this.cursosServicio.eliminarCurso(id)
   }
 
   verMas(curso: any){
     this.dialog.open(DetalleCursoComponent,{
       data: curso
     })
+  }
+
+  MostrarToast(itMsg: string) {
+    this.iziToast.show({
+      title: itMsg,
+      timeout: 1000,
+      color: 'green',
+      position: 'topCenter',
+    });
   }
 
 }

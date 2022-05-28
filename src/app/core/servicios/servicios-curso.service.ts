@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subject, Subscription } from 'rxjs';
+import { Ng2IzitoastService } from 'ng2-izitoast';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ServiciosCursoService {
   cursoSubscripcion!: Subscription;
   cursoSubject!: Subject<any>;
   cursos!: any[] ;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,public iziToast: Ng2IzitoastService) {
   }
 
   obtenerCurso(): Observable<any> {
@@ -48,8 +49,16 @@ export class ServiciosCursoService {
   eliminarCurso(id: number){
     this.cursos = this.cursos.filter( curso => curso.id !== id);
     this.http.delete('https://62726699c455a64564c084c3.mockapi.io/cursos/'+ id).subscribe(element =>{
-      console.log('eliminado')
+      this.MostrarToast('Curso Eliminado')
     });
     return of(this.cursos);
+  }
+  MostrarToast(itMsg: string) {
+    this.iziToast.show({
+      title: itMsg,
+      timeout: 1000,
+      color: 'green',
+      position: 'topCenter',
+    });
   }
 }
