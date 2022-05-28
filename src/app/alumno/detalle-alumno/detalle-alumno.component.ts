@@ -2,6 +2,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { Ng2IzitoastService } from 'ng2-izitoast';
 import { elementAt, forkJoin, Observable } from 'rxjs';
 import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 import { ServiciosCursoService } from 'src/app/core/servicios/servicios-curso.service';
@@ -23,7 +24,8 @@ export class DetalleAlumnoComponent implements OnInit {
     public servicioCursos: ServiciosCursoService,
     public servicioAlumnos: ServicioAlumnoService,
     public dialogRef: MatDialogRef<DetalleAlumnoComponent>,
-    private servicioUsuario: UsuarioService
+    private servicioUsuario: UsuarioService,
+    public iziToast: Ng2IzitoastService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +57,18 @@ export class DetalleAlumnoComponent implements OnInit {
     });
     forkJoin(observables).subscribe(element =>{
       this.dialogRef.close();
+      this.MostrarToast('Alumno desinscripto');
     })
+  }
+
+
+  MostrarToast(itMsg: string) {
+    this.iziToast.show({
+      title: itMsg,
+      timeout: 1000,
+      color: 'green',
+      position: 'topCenter',
+    });
   }
 
 }
