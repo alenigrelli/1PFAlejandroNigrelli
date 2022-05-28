@@ -22,12 +22,25 @@ export class UsuarioService {
   esAdmin(){
     let usuarioActivo = false;
     let usuarioLogueado: any;
-    
-    this.store.select(selectorUsuarioActivo).subscribe((usuario) => {
-      usuarioActivo = usuario.sesionActiva;
-      usuarioLogueado = usuario;
-    });
-    if(usuarioActivo && usuarioLogueado.usuario.permisos.includes('admin')){
+    let usuarioPersistente = localStorage.getItem('usuarioLogueado') || '';
+    let usuarioPersistenteObject;
+    let esAdmin = false;
+    if( usuarioPersistente.length > 0){
+      usuarioPersistenteObject = JSON.parse(usuarioPersistente);
+    }
+    if(usuarioPersistenteObject?.permisos.includes('admin')){
+      usuarioActivo = true;
+      esAdmin = true;
+    }else{
+      this.store.select(selectorUsuarioActivo).subscribe((usuario) => {
+        usuarioActivo = usuario.sesionActiva;
+        usuarioLogueado = usuario;
+        if(usuarioLogueado.usuario.permisos.includes('admin')){
+          esAdmin = true
+        }
+      });
+    }
+    if(usuarioActivo && esAdmin){
       return true;
     }else{
       return false;

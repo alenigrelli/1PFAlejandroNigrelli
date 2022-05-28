@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Ng2IzitoastService } from 'ng2-izitoast';
 import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 @Component({
   selector: 'abmalumnos',
@@ -24,6 +25,7 @@ export class abmalumnosComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private servicioAlumnos: ServicioAlumnoService,
     public dialogRef: MatDialogRef<abmalumnosComponent>,
+    public iziToast: Ng2IzitoastService
   ){
   }
 
@@ -53,12 +55,19 @@ export class abmalumnosComponent implements OnInit {
           alumno =>{
             this.dialogRef.close();
             this.servicioAlumnos.actualizaSubject(alumno);
+            this.MostrarToast('Alumno creado/modificado')
           }
         )
       })
-    }
+    }    
   }
-
-
+  MostrarToast(itMsg: string) {
+    this.iziToast.show({
+      title: itMsg,
+      timeout: 1000,
+      color: 'green',
+      position: 'topCenter',
+    });
+  }
 
 }

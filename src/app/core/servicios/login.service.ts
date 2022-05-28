@@ -22,8 +22,6 @@ export class LoginService {
 
   usuarioLogueado(){
     let logueado = false;
-    //let usuarioLogueado = localStorage.getItem('usuarioLogueado') || '';
-    //let usuarioLogueado =
     let usuarioPersistente = localStorage.getItem('usuarioLogueado') || '';
     if(!usuarioPersistente){
       this.store.select(selectorUsuarioActivo).subscribe((usuario) => {
@@ -34,7 +32,6 @@ export class LoginService {
       this.usuarioActivo = true;
       logueado = true;
     }
-    //console.log(this.usuarioActivo);
     this.subjectUsuarioLogueado.next(logueado);
     return this.subjectUsuarioLogueado;
   }

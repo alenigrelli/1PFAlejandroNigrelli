@@ -6,6 +6,7 @@ import { elementAt, Subscription } from 'rxjs';
 import { DetalleAlumnoComponent } from '../detalle-alumno/detalle-alumno.component';
 import { ServicioAlumnoService } from 'src/app/core/servicios/servicio-alumno.service';
 import { UsuarioService } from 'src/app/core/servicios/usuario.service';
+import { Ng2IzitoastService } from 'ng2-izitoast';
 
 @Component({
   selector: 'app-lista-alumnos',
@@ -20,7 +21,8 @@ export class ListaAlumnosComponent implements OnInit, OnDestroy {
   subscripcion!: Subscription;
   constructor(public dialog: MatDialog, 
     private servicioAlumnos: ServicioAlumnoService,
-    private servicioUsuario: UsuarioService) {
+    private servicioUsuario: UsuarioService,
+    public iziToast: Ng2IzitoastService) {
   }
 
   ngOnInit(): void {
@@ -38,6 +40,7 @@ export class ListaAlumnosComponent implements OnInit, OnDestroy {
   eliminarAlumno(id: number){
     this.servicioAlumnos.eliminarAlumno(id).subscribe(element =>{
       this.servicioAlumnos.actualizaSubject();
+      this.MostrarToast('Alumno eliminado.')
     });
   }
 
@@ -67,5 +70,14 @@ export class ListaAlumnosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
       this.subscripcion?.unsubscribe();
+  }
+
+  MostrarToast(itMsg: string) {
+    this.iziToast.show({
+      title: itMsg,
+      timeout: 1000,
+      color: 'green',
+      position: 'topCenter',
+    });
   }
 }

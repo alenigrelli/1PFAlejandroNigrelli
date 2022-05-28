@@ -21,6 +21,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { authFeatureKey, loginReducer } from './state/reducers/login.reducer';
+import { Ng2IziToastModule } from 'ng2-izitoast';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { authFeatureKey, loginReducer } from './state/reducers/login.reducer';
     LoginComponent,
   ],
   imports: [
+    Ng2IziToastModule,
     InscripcionModule,
     CursoModule,
     AlumnoModule,
